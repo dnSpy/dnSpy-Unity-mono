@@ -14,17 +14,8 @@ The master branch contains the original files. You have to check out the `dnSpy`
 - Commit
 - Switch to dnSpy branch
 - Merge master branch into this branch
-- Open `msvc\mono.sln` with VS2017 or later
-	- Let it convert the following projects:
-		- eglib
-		- genmdesc
-		- libgc
-		- libmono
-	- Use latest Windows SDK
-	- Change toolset to v14.1
-- Save and exit VS2017
-- Ignore changes made to mono.sln (`git checkout msvc/mono.sln`)
 - Open `dnSpy-Unity-mono.sln` and add a new solution folder and the new projects to it
+- Retarget the solution to latest Windows SDK and toolset v141
 - Fix references since they're referencing the 4.0 projects and make sure each 'new' project reference has `Reference Assembly Output` set to `False` in the `Properties` window
 - Remove 'Treat warnings as errors' from `eglib` project in All Configurations and Win32/x64 platforms
 - Open `msvc/libmono.vcxproj` and
