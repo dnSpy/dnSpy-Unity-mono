@@ -1,0 +1,699 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{76daa12a-fc7f-43fa-aebf-08deb74887ef}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl</Extensions>
+    </Filter>
+    <Filter Include="utils">
+      <UniqueIdentifier>{a81a58b7-a200-4641-a763-10e907f97c66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="metadata">
+      <UniqueIdentifier>{1cede64d-cfc2-459f-89ef-c0ccce1aa3bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="os">
+      <UniqueIdentifier>{0df54f43-3c11-4a03-a1aa-f608f7b53c28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="mini">
+      <UniqueIdentifier>{64d0168c-7862-4530-8118-9cb137fd4606}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="mini\x86">
+      <UniqueIdentifier>{8a8d73f7-290c-4603-b827-1845f7726574}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="mini\amd64">
+      <UniqueIdentifier>{2cd19de6-0af0-4653-88b2-f0a6cb633169}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="mini\arm">
+      <UniqueIdentifier>{d72dc29e-367c-4bab-9f42-7668517eea50}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="unity">
+      <UniqueIdentifier>{d0a4ba96-6a77-4755-8b3c-0544dd9becbd}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\config.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\io-layer\io-layer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\utils\dlmalloc.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\utils\mono-codeman.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\utils\mono-compiler.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\utils\mono-counters.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\utils\mono-digest.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\utils\mono-dl-fallback.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\utils\mono-dl.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\utils\mono-error-internals.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\utils\mono-error.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\utils\mono-hash.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\utils\mono-internal-hash.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\utils\mono-io-portability.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\utils\mono-logger.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\utils\mono-math.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\utils\mono-membar.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\utils\mono-mmap.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\utils\mono-networkinterfaces.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\utils\mono-path.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\utils\mono-poll.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\utils\mono-proclib.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\utils\mono-property-hash.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\utils\mono-publib.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\utils\mono-semaphore.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\utils\mono-stdlib.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\utils\mono-time.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\utils\mono-uri.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\utils\mono-value-hash.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\utils\monobitset.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\utils\strenc.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\utils\strtod.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\metadata\appdomain.h">
+      <Filter>metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\metadata\attach.h">
+      <Filter>metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\metadata\char-conversions.h">
+      <Filter>metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\metadata\cil-coff.h">
+      <Filter>metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\metadata\class-internals.h">
+      <Filter>metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\metadata\cominterop.h">
+      <Filter>metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\metadata\console-io.h">
+      <Filter>metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\metadata\coree.h">
+      <Filter>metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\metadata\culture-info-tables.h">
+      <Filter>metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\metadata\culture-info.h">
+      <Filter>metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\metadata\debug-mono-symfile.h">
+      <Filter>metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\metadata\decimal.h">
+      <Filter>metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\metadata\domain-internals.h">
+      <Filter>metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\metadata\environment.h">
+      <Filter>metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\metadata\exception.h">
+      <Filter>metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\metadata\file-io.h">
+      <Filter>metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\metadata\filewatcher.h">
+      <Filter>metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\metadata\gc-internal.h">
+      <Filter>metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\metadata\locales.h">
+      <Filter>metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\metadata\marshal.h">
+      <Filter>metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\metadata\metadata-internals.h">
+      <Filter>metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\metadata\method-builder.h">
+      <Filter>metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\metadata\monitor.h">
+      <Filter>metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\metadata\mono-basic-block.h">
+      <Filter>metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\metadata\mono-debug-debugger.h">
+      <Filter>metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\metadata\mono-debug.h">
+      <Filter>metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\metadata\mono-mlist.h">
+      <Filter>metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\metadata\mono-perfcounters.h">
+      <Filter>metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\metadata\object-internals.h">
+      <Filter>metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\metadata\process.h">
+      <Filter>metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\metadata\profiler-private.h">
+      <Filter>metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\metadata\rand.h">
+      <Filter>metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\metadata\security-core-clr.h">
+      <Filter>metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\metadata\security-manager.h">
+      <Filter>metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\metadata\security.h">
+      <Filter>metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\metadata\socket-io.h">
+      <Filter>metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\metadata\string-icalls.h">
+      <Filter>metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\metadata\sysmath.h">
+      <Filter>metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\metadata\tabledefs.h">
+      <Filter>metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\metadata\threadpool.h">
+      <Filter>metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\metadata\threads-types.h">
+      <Filter>metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\os\gc_wrapper.h">
+      <Filter>os</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\mini\abcremoval.h">
+      <Filter>mini</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\mini\cpu-pentium.h">
+      <Filter>mini</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\mini\debugger-agent.h">
+      <Filter>mini</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\mini\declsec.h">
+      <Filter>mini</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\mini\dwarfwriter.h">
+      <Filter>mini</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\mini\image-writer.h">
+      <Filter>mini</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\mini\ir-emit.h">
+      <Filter>mini</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\mini\jit-icalls.h">
+      <Filter>mini</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\mini\mini-arch.h">
+      <Filter>mini</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\mini\mini-gc.h">
+      <Filter>mini</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\mini\mini-ops.h">
+      <Filter>mini</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\mini\mini.h">
+      <Filter>mini</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\mini\regalloc.h">
+      <Filter>mini</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\mini\ssapre.h">
+      <Filter>mini</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\mini\trace.h">
+      <Filter>mini</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mono\mini\mini-arm.h">
+      <Filter>mini\arm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\unity\libmono_vcdefs.h">
+      <Filter>unity</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\mono\utils\dlmalloc.c">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\utils\mono-codeman.c">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\utils\mono-counters.c">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\utils\mono-dl.c">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\utils\mono-ehash.c">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\utils\mono-error.c">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\utils\mono-filemap.c">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\utils\mono-hash.c">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\utils\mono-internal-hash.c">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\utils\mono-io-portability.c">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\utils\mono-logger.c">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\utils\mono-math.c">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\utils\mono-md5.c">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\utils\mono-mmap.c">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\utils\mono-networkinterfaces.c">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\utils\mono-path.c">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\utils\mono-poll.c">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\utils\mono-proclib.c">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\utils\mono-property-hash.c">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\utils\mono-publib.c">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\utils\mono-semaphore.c">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\utils\mono-sha1.c">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\utils\mono-stdlib.c">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\utils\mono-time.c">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\utils\mono-uri.c">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\utils\mono-value-hash.c">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\utils\monobitset.c">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\utils\strenc.c">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\utils\strtod.c">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\metadata\appdomain.c">
+      <Filter>metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\metadata\assembly.c">
+      <Filter>metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\metadata\attach.c">
+      <Filter>metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\metadata\boehm-gc.c">
+      <Filter>metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\metadata\class.c">
+      <Filter>metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\metadata\cominterop.c">
+      <Filter>metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\metadata\console-win32.c">
+      <Filter>metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\metadata\coree.c">
+      <Filter>metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\metadata\debug-helpers.c">
+      <Filter>metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\metadata\debug-mono-symfile.c">
+      <Filter>metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\metadata\decimal.c">
+      <Filter>metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\metadata\domain.c">
+      <Filter>metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\metadata\environment.c">
+      <Filter>metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\metadata\exception.c">
+      <Filter>metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\metadata\file-io.c">
+      <Filter>metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\metadata\filewatcher.c">
+      <Filter>metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\metadata\gc.c">
+      <Filter>metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\metadata\generic-sharing.c">
+      <Filter>metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\metadata\icall.c">
+      <Filter>metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\metadata\image.c">
+      <Filter>metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\metadata\loader.c">
+      <Filter>metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\metadata\locales.c">
+      <Filter>metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\metadata\marshal.c">
+      <Filter>metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\metadata\mempool.c">
+      <Filter>metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\metadata\metadata-verify.c">
+      <Filter>metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\metadata\metadata.c">
+      <Filter>metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\metadata\method-builder.c">
+      <Filter>metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\metadata\monitor.c">
+      <Filter>metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\metadata\mono-basic-block.c">
+      <Filter>metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\metadata\mono-config.c">
+      <Filter>metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\metadata\mono-debug-debugger.c">
+      <Filter>metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\metadata\mono-debug.c">
+      <Filter>metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\metadata\mono-endian.c">
+      <Filter>metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\metadata\mono-mlist.c">
+      <Filter>metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\metadata\mono-perfcounters.c">
+      <Filter>metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\metadata\object.c">
+      <Filter>metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\metadata\opcodes.c">
+      <Filter>metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\metadata\process.c">
+      <Filter>metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\metadata\profiler.c">
+      <Filter>metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\metadata\rand.c">
+      <Filter>metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\metadata\reflection.c">
+      <Filter>metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\metadata\security-core-clr.c">
+      <Filter>metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\metadata\security-manager.c">
+      <Filter>metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\metadata\security.c">
+      <Filter>metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\metadata\socket-io.c">
+      <Filter>metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\metadata\string-icalls.c">
+      <Filter>metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\metadata\sysmath.c">
+      <Filter>metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\metadata\threadpool.c">
+      <Filter>metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\metadata\threads.c">
+      <Filter>metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\metadata\verify.c">
+      <Filter>metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\mini\abcremoval.c">
+      <Filter>mini</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\mini\aot-compiler.c">
+      <Filter>mini</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\mini\aot-runtime.c">
+      <Filter>mini</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\mini\branch-opts.c">
+      <Filter>mini</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\mini\cfold.c">
+      <Filter>mini</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\mini\debug-mini.c">
+      <Filter>mini</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\mini\debugger-agent.c">
+      <Filter>mini</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\mini\declsec.c">
+      <Filter>mini</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\mini\decompose.c">
+      <Filter>mini</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\mini\dominators.c">
+      <Filter>mini</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\mini\driver.c">
+      <Filter>mini</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\mini\dwarfwriter.c">
+      <Filter>mini</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\mini\graph.c">
+      <Filter>mini</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\mini\helpers.c">
+      <Filter>mini</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\mini\image-writer.c">
+      <Filter>mini</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\mini\jit-icalls.c">
+      <Filter>mini</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\mini\linear-scan.c">
+      <Filter>mini</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\mini\liveness.c">
+      <Filter>mini</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\mini\local-propagation.c">
+      <Filter>mini</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\mini\method-to-ir.c">
+      <Filter>mini</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\mini\mini-codegen.c">
+      <Filter>mini</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\mini\mini-exceptions.c">
+      <Filter>mini</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\mini\mini-gc.c">
+      <Filter>mini</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\mini\mini-generic-sharing.c">
+      <Filter>mini</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\mini\mini-trampolines.c">
+      <Filter>mini</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\mini\mini-windows.c">
+      <Filter>mini</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\mini\mini.c">
+      <Filter>mini</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\mini\regalloc.c">
+      <Filter>mini</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\mini\regalloc2.c">
+      <Filter>mini</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\mini\simd-intrinsics.c">
+      <Filter>mini</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\mini\ssa.c">
+      <Filter>mini</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\mini\ssapre.c">
+      <Filter>mini</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\mini\trace.c">
+      <Filter>mini</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\mini\unwind.c">
+      <Filter>mini</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\mini\wapihandles.c">
+      <Filter>mini</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\mini\exceptions-x86.c">
+      <Filter>mini\x86</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\mini\mini-x86.c">
+      <Filter>mini\x86</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\mini\tramp-x86.c">
+      <Filter>mini\x86</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\mini\exceptions-amd64.c">
+      <Filter>mini\amd64</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\mini\mini-amd64.c">
+      <Filter>mini\amd64</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\mini\tramp-amd64.c">
+      <Filter>mini\amd64</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\mini\exceptions-arm.c">
+      <Filter>mini\arm</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\mini\mini-arm.c">
+      <Filter>mini\arm</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\mini\tramp-arm.c">
+      <Filter>mini\arm</Filter>
+    </ClCompile>
+    <ClCompile Include="..\unity\unity_cross_utils.c">
+      <Filter>unity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\unity\unity_liveness.c">
+      <Filter>unity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\unity\unity_utils.c">
+      <Filter>unity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mono\mini\dnSpy.c">
+      <Filter>mini</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="..\mono\mini\mini-x86.h">
+      <Filter>mini\x86</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\mono\mini\mini-amd64.h">
+      <Filter>mini\amd64</Filter>
+    </CustomBuild>
+  </ItemGroup>
+</Project>
