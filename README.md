@@ -2,6 +2,11 @@ This repo contains all files needed to build mono.dll with debugging support for
 
 The master branch contains the original files. You have to check out the `dnSpy` branch to build everything. Use VS2017.
 
+# Known issues
+
+> mono.dll sometimes crashes in `mono_unwind_frame`
+
+Workaround: Compile a debug build (`Debug_eglib`) instead of a release build (`Release_eglib`)
 
 # Adding a new unity branch
 
@@ -47,6 +52,18 @@ The master branch contains the original files. You have to check out the `dnSpy`
  		} else {
  			print_usage ();
  			exit (1);
+```
+	- `mono/mini/debugger-agent.c`: func `thread_commands`
+```C
+ 		mono_loader_lock ();
+ 		tls = mono_g_hash_table_lookup (thread_to_tls, thread);
+ 		mono_loader_unlock ();
+-		g_assert (tls);
++		if (!tls)
++			return ERR_INVALID_ARGUMENT;
+ 
+ 		compute_frame_info (thread, tls);
+ 
 ```
 	- `mono/mini/mini.c`: func `mini_init`
 ```C
