@@ -175,5 +175,6 @@ version | git hash
 2017.1.2 | 3ca35a90d3c4c41f3abe53ed518d46732fe8a79e
 2017.2.0 | 2fea43d2755abd9aace913a596dd4f7d011014c5
 2017.2.1 | 540e1297eefe581a588a80173fd41ae6b8c1cc78
+2017.3.0 | 94a03ac32cab0d7c1d663fd5ee415ecf8c707ca3
 
 To find the commit hash, get the PE header timestamp from `mono.dll` and find the closest commit (should be a merge) from the correct branch, eg. `unity-2017.1`. `gitk` or other UI can be used, or `git log --merges`.
