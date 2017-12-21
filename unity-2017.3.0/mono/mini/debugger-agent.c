@@ -777,6 +777,7 @@ mono_debugger_agent_parse_options (char *options)
 					agent_config.address = g_strdup_printf ("0.0.0.0:%u", 56000 + (GetCurrentProcessId () % 1000));
 				}
 			}
+		} else if (dnSpy_debugger_agent_parse_options (arg)) {
 		} else {
 			print_usage ();
 			exit (1);
@@ -6803,7 +6804,8 @@ thread_commands (int command, guint8 *p, guint8 *end, Buffer *buf)
 		mono_loader_lock ();
 		tls = mono_g_hash_table_lookup (thread_to_tls, thread);
 		mono_loader_unlock ();
-		g_assert (tls);
+		if (!tls)
+			return ERR_INVALID_ARGUMENT;
 
 		compute_frame_info (thread, tls);
 

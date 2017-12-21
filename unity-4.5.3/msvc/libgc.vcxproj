@@ -46,7 +46,7 @@
     <ProjectGuid>{E10A7747-25CC-4A73-B922-0A35CF3A8356}</ProjectGuid>
     <RootNamespace>libgc</RootNamespace>
     <Keyword>Win32Proj</Keyword>
-    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_eglib_xarm|Win32'" Label="Configuration">

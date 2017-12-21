@@ -45,7 +45,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{E9ABC5EE-8739-4CD4-8F18-CB0A52DB71C0}</ProjectGuid>
     <RootNamespace>libmono</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_eglib_xarm|Win32'" Label="Configuration">

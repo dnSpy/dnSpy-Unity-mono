@@ -46,7 +46,7 @@
     <ProjectGuid>{6A906E1B-A6B4-47A5-8F6A-E7EEA1750A31}</ProjectGuid>
     <RootNamespace>eglib</RootNamespace>
     <Keyword>Win32Proj</Keyword>
-    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_eglib_xarm|Win32'" Label="Configuration">
