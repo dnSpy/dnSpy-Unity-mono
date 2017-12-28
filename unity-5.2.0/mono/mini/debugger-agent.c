@@ -825,6 +825,8 @@ mono_debugger_agent_init (void)
 	mono_profiler_install_jit_end (jit_end);
 	mono_profiler_install_method_invoke (start_runtime_invoke, end_runtime_invoke);
 
+	dnSpy_debugger_init_after_agent ();
+
 	debugger_tls_id = TlsAlloc ();
 
 	thread_to_tls = mono_g_hash_table_new (NULL, NULL);

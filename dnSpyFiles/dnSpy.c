@@ -23,3 +23,17 @@ dnSpy_debugger_agent_parse_options (char* arg)
 
 	return 0;
 }
+
+typedef struct { void* dummy; } DebuggerProfiler;
+static DebuggerProfiler dnSpy_dummy_profiler;
+static void
+dnSpy_runtime_shutdown(MonoProfiler *prof)
+{
+}
+
+void
+dnSpy_debugger_init_after_agent ()
+{
+	// Prevent the debugger-agent's profiler events from being overwritten
+	mono_profiler_install((MonoProfiler*)&dnSpy_dummy_profiler, dnSpy_runtime_shutdown);
+}
