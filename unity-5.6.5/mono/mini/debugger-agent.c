@@ -777,6 +777,7 @@ mono_debugger_agent_parse_options (char *options)
 					agent_config.address = g_strdup_printf ("0.0.0.0:%u", 56000 + (GetCurrentProcessId () % 1000));
 				}
 			}
+		} else if (dnSpy_debugger_agent_parse_options (arg)) {
 		} else {
 			print_usage ();
 			exit (1);
@@ -829,6 +830,8 @@ mono_debugger_agent_init (void)
 	mono_profiler_install_assembly (NULL, assembly_load, assembly_unload, NULL);
 	mono_profiler_install_jit_end (jit_end);
 	mono_profiler_install_method_invoke (start_runtime_invoke, end_runtime_invoke);
+
+	dnSpy_debugger_init_after_agent ();
 
 	debugger_tls_id = TlsAlloc ();
 
@@ -6803,7 +6806,8 @@ thread_commands (int command, guint8 *p, guint8 *end, Buffer *buf)
 		mono_loader_lock ();
 		tls = mono_g_hash_table_lookup (thread_to_tls, thread);
 		mono_loader_unlock ();
-		g_assert (tls);
+		if (!tls)
+			return ERR_INVALID_ARGUMENT;
 
 		compute_frame_info (thread, tls);
 
