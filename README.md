@@ -32,67 +32,67 @@ Workaround: Compile a debug build (`Debug_eglib`) instead of a release build (`R
 - Change `libmono` `Debug Information Format` and `Generate Debug Info` for configuration `Release_eglib` and for all platforms to No/None
 - Update the code. These instructions may be out of date, but you can diff the dnSpy branch with master and ignore all project files to see all changes
 	- `mono/metadata/icall.c`: func `ves_icall_System_Diagnostics_Debugger_IsAttached_internal`
-```C
-+extern gboolean dnSpy_hideDebugger;
-+
- static MonoBoolean
- ves_icall_System_Diagnostics_Debugger_IsAttached_internal (void)
- {
-+	if (dnSpy_hideDebugger)
-+		return 0;
- 	return mono_debug_using_mono_debugger () || mono_is_debugger_attached ();
- }
-```
+	```C
+	+extern gboolean dnSpy_hideDebugger;
+	+
+	 static MonoBoolean
+	 ves_icall_System_Diagnostics_Debugger_IsAttached_internal (void)
+	 {
+	+	if (dnSpy_hideDebugger)
+	+		return 0;
+		return mono_debug_using_mono_debugger () || mono_is_debugger_attached ();
+	 }
+	```
 	- `mono/mini/debugger-agent.c`: func `mono_debugger_agent_parse_options`
-```C
- 					agent_config.address = g_strdup_printf ("0.0.0.0:%u", 56000 + (GetCurrentProcessId () % 1000));
- 				}
- 			}
-+		} else if (dnSpy_debugger_agent_parse_options (arg)) {
- 		} else {
- 			print_usage ();
- 			exit (1);
-```
+	```C
+						agent_config.address = g_strdup_printf ("0.0.0.0:%u", 56000 + (GetCurrentProcessId () % 1000));
+					}
+				}
+	+		} else if (dnSpy_debugger_agent_parse_options (arg)) {
+			} else {
+				print_usage ();
+				exit (1);
+	```
 	- `mono/mini/debugger-agent.c`: func `mono_debugger_agent_init`
-```C
- 	mono_profiler_install_jit_end (jit_end);
- 	mono_profiler_install_method_invoke (start_runtime_invoke, end_runtime_invoke);
- 
-+	dnSpy_debugger_init_after_agent ();
-+
- 	debugger_tls_id = TlsAlloc ();
- 
- 	thread_to_tls = mono_g_hash_table_new (NULL, NULL);
-```
+	```C
+		mono_profiler_install_jit_end (jit_end);
+		mono_profiler_install_method_invoke (start_runtime_invoke, end_runtime_invoke);
+	 
+	+	dnSpy_debugger_init_after_agent ();
+	+
+		debugger_tls_id = TlsAlloc ();
+	 
+		thread_to_tls = mono_g_hash_table_new (NULL, NULL);
+	```
 	- `mono/mini/debugger-agent.c`: func `thread_commands`
-```C
- 		mono_loader_lock ();
- 		tls = mono_g_hash_table_lookup (thread_to_tls, thread);
- 		mono_loader_unlock ();
--		g_assert (tls);
-+		if (!tls)
-+			return ERR_INVALID_ARGUMENT;
- 
- 		compute_frame_info (thread, tls);
- 
-```
+	```C
+			mono_loader_lock ();
+			tls = mono_g_hash_table_lookup (thread_to_tls, thread);
+			mono_loader_unlock ();
+	-		g_assert (tls);
+	+		if (!tls)
+	+			return ERR_INVALID_ARGUMENT;
+	 
+			compute_frame_info (thread, tls);
+	 
+	```
 	- `mono/mini/mini.c`: func `mini_init`
-```C
- 
- 	MONO_PROBE_VES_INIT_BEGIN ();
- 
-+	dnSpy_debugger_init ();
-+
- #ifdef __linux__
- 	if (access ("/proc/self/maps", F_OK) != 0) {
- 		g_print ("Mono requires /proc to be mounted.\n");
-```
+	```C
+	 
+		MONO_PROBE_VES_INIT_BEGIN ();
+	 
+	+	dnSpy_debugger_init ();
+	+
+	 #ifdef __linux__
+		if (access ("/proc/self/maps", F_OK) != 0) {
+			g_print ("Mono requires /proc to be mounted.\n");
+	```
 	- Add a new `mono/mini/dnSpy.c` file with this content:
-```C
-#include "debug-mini.h"
-#include "debugger-agent.h"
-#include "../dnSpyFiles/dnSpy.c"
-```
+	```C
+	#include "debug-mini.h"
+	#include "debugger-agent.h"
+	#include "../dnSpyFiles/dnSpy.c"
+	```
 - Compile it
 	- Use configuration `Release_eglib`
 	- Use platform `x86` or `x64`
