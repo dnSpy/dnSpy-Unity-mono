@@ -8,94 +8,34 @@ The master branch contains the original files. You have to check out the `dnSpy`
 
 Workaround: Compile a debug build (`Debug_eglib`) instead of a release build (`Release_eglib`)
 
-# Adding a new unity branch
+# Supporting a new Unity version for Dummies
 
-- Check out the correct branch in the Unity mono repo and make sure there are no modified files left
-- Switch to master branch in the dnSpy-Unity-mono repo
-- Copy the following from the Unity mono root folder to a new root folder:
-	- All root files
-	- The following folders: `eglib`, `libgc`, `mono`, `msvc`, `unity`
-- Remove `/opcode.def` from `mono/cil/.gitignore`
-- Commit
-- Switch to dnSpy branch
-- Merge master branch into this branch
-- Open `dnSpy-Unity-mono.sln` and add a new solution folder and the new projects to it
-- Retarget the solution to latest Windows SDK and toolset v141
-- Fix references since they're referencing the 4.0 projects and make sure each 'new' project reference has `Reference Assembly Output` set to `False` in the `Properties` window
-- Remove 'Treat warnings as errors' from `eglib` project in All Configurations and Win32/x64 platforms
-- Open `msvc/libmono.vcxproj` and
-	- replace `WINVER=0x0500;_WIN32_WINNT=0x0500` with `WINVER=0x0501;_WIN32_WINNT=0x0501`
-	- Remove all lines with the string BrowseInformation
-- Comment out `#define trunc(x) .....` in `mono/utils/mono-compiler.h`
-- Comment out `stdout->_file = fd;` in `unity/unity_utils.c`, it's never called
-- Change `libmono` `Output Directory` for all configurations and all platforms to `..\..\builds\$(Configuration)\_UNITY_NAME_\win$(PlatformArchitecture)\` where `_UNITY_NAME_` is the name of the branch
-- Change `libmono` `Debug Information Format` and `Generate Debug Info` for configuration `Release_eglib` and for all platforms to No/None
-- Update the code. These instructions may be out of date, but you can diff the dnSpy branch with master and ignore all project files to see all changes
-	- `mono/metadata/icall.c`: func `ves_icall_System_Diagnostics_Debugger_IsAttached_internal`
-	```C
-	+extern gboolean dnSpy_hideDebugger;
-	+
-	 static MonoBoolean
-	 ves_icall_System_Diagnostics_Debugger_IsAttached_internal (void)
-	 {
-	+	if (dnSpy_hideDebugger)
-	+		return 0;
-		return mono_debug_using_mono_debugger () || mono_is_debugger_attached ();
-	 }
-	```
-	- `mono/mini/debugger-agent.c`: func `mono_debugger_agent_parse_options`
-	```C
-						agent_config.address = g_strdup_printf ("0.0.0.0:%u", 56000 + (GetCurrentProcessId () % 1000));
-					}
-				}
-	+		} else if (dnSpy_debugger_agent_parse_options (arg)) {
-			} else {
-				print_usage ();
-				exit (1);
-	```
-	- `mono/mini/debugger-agent.c`: func `mono_debugger_agent_init`
-	```C
-		mono_profiler_install_jit_end (jit_end);
-		mono_profiler_install_method_invoke (start_runtime_invoke, end_runtime_invoke);
-	 
-	+	dnSpy_debugger_init_after_agent ();
-	+
-		debugger_tls_id = TlsAlloc ();
-	 
-		thread_to_tls = mono_g_hash_table_new (NULL, NULL);
-	```
-	- `mono/mini/debugger-agent.c`: func `thread_commands`
-	```C
-			mono_loader_lock ();
-			tls = mono_g_hash_table_lookup (thread_to_tls, thread);
-			mono_loader_unlock ();
-	-		g_assert (tls);
-	+		if (!tls)
-	+			return ERR_INVALID_ARGUMENT;
-	 
-			compute_frame_info (thread, tls);
-	 
-	```
-	- `mono/mini/mini.c`: func `mini_init`
-	```C
-	 
-		MONO_PROBE_VES_INIT_BEGIN ();
-	 
-	+	dnSpy_debugger_init ();
-	+
-	 #ifdef __linux__
-		if (access ("/proc/self/maps", F_OK) != 0) {
-			g_print ("Mono requires /proc to be mounted.\n");
-	```
-	- Add a new `mono/mini/dnSpy.c` file with this content:
-	```C
-	#include "debug-mini.h"
-	#include "debugger-agent.h"
-	#include "../dnSpyFiles/dnSpy.c"
-	```
-- Compile it
-	- Use configuration `Release_eglib`
-	- Use platform `x86` or `x64`
+- Pull in the latest Unity mono.dll source code (either `git pull` if you have it or `git clone https://github.com/Unity-Technologies/mono.git`)
+- Get this repo and make sure `master` and `dnSpy` branches are at the latest commit (`git pull` in both branches)
+- Compile `umpatcher` in this repo
+- Download and install the correct Unity editor version
+	- https://unity3d.com/get-unity/download/archive
+	- https://unity3d.com/unity/qa/lts-releases
+	- https://unity3d.com/unity/qa/patch-releases
+- Locate the compiled mono.dll files, eg.:
+	- `C:\Program Files\Unity\Editor\Data\PlaybackEngines\windowsstandalonesupport\Variations\win32_nondevelopment_mono\Data\Mono\EmbedRuntime\mono.dll`
+	- `C:\Program Files\Unity\Editor\Data\PlaybackEngines\windowsstandalonesupport\Variations\win64_nondevelopment_mono\Data\Mono\EmbedRuntime\mono.dll`
+- Get the timestamp stored in mono.dll's PE header
+	- `umpatcher --timestamp "C:\path\to\the\correct\version\mono.dll"`
+- Check out the correct version branch in the Unity mono repo, eg. if it's v5.4.3, the branch is called `unity-5.4`
+	- Use `git branch -a` to see all remote branches
+- `git checkout unity-5.4` (or whatever version you need)
+- `git pull` (make sure it has the latest stuff)
+- `gitk` to start a UI
+	- Find the closest merge by comparing the merge date with the timestamp reported by `umpatcher` above
+	- Remember the commit hash, you'll need it later
+- Run umpatcher again to patch the code and commit it to the dnSpy-Unity-mono repo
+	- `umpatcher 5.4.3 aa8a6e7afc2f4fe63921df4fe8a18cfd0a441d19 "C:\path\to\Unity-mono" "C:\path\to\dnSpy-Unity-mono"`
+
+# Building mono.dll
+
+- Use configuration `Release_eglib`
+- Use platform `x86` or `x64`
 
 # Commit hashes
 
