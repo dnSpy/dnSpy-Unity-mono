@@ -20,7 +20,7 @@
 using System;
 using System.IO;
 
-namespace UnityMonoDllSourceCodePatcher {
+namespace UnityMonoDllSourceCodePatcher.V35 {
 	sealed class SolutionPatcher {
 		readonly SolutionOptions solutionOptions;
 		readonly TextFilePatcher textFilePatcher;
@@ -76,13 +76,13 @@ namespace UnityMonoDllSourceCodePatcher {
 		}
 
 		void AddProjectConfigurationPlatforms() {
-			int index = textFilePatcher.GetIndexOfLine(Constants.Solution_ProjectConfigurationPlatforms_Line);
-			index = textFilePatcher.GetIndexOfLine(Constants.Solution_EndGlobalSection_Line, index);
+			int index = textFilePatcher.GetIndexOfLine(ConstantsV35.Solution_ProjectConfigurationPlatforms_Line);
+			index = textFilePatcher.GetIndexOfLine(ConstantsV35.Solution_EndGlobalSection_Line, index);
 			foreach (var project in solutionOptions.AllProjects) {
 				var projectGuidString = ToString(project.Guid);
-				foreach (var config in Constants.SolutionConfigurations) {
-					foreach (var info in Constants.SolutionPlatforms) {
-						foreach (var buildInfo in Constants.SolutionBuildInfos)
+				foreach (var config in ConstantsV35.SolutionConfigurations) {
+					foreach (var info in ConstantsV35.SolutionPlatforms) {
+						foreach (var buildInfo in ConstantsV35.SolutionBuildInfos)
 							textFilePatcher.Insert(index++, $"\t\t{projectGuidString}.{config}|{info.archName}.{buildInfo} = {config}|{info.configName}");
 					}
 				}
@@ -90,8 +90,8 @@ namespace UnityMonoDllSourceCodePatcher {
 		}
 
 		void AddNestedProjects() {
-			int index = textFilePatcher.GetIndexOfLine(Constants.Solution_NestedProjects_Line);
-			index = textFilePatcher.GetIndexOfLine(Constants.Solution_EndGlobalSection_Line, index);
+			int index = textFilePatcher.GetIndexOfLine(ConstantsV35.Solution_NestedProjects_Line);
+			index = textFilePatcher.GetIndexOfLine(ConstantsV35.Solution_EndGlobalSection_Line, index);
 			foreach (var project in solutionOptions.AllProjects) {
 				var projectGuidString = ToString(project.Guid);
 				var unityVersionDirGuidString = ToString(unityVersionDirGuid);

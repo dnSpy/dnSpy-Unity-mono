@@ -19,7 +19,7 @@
 
 using System;
 
-namespace UnityMonoDllSourceCodePatcher {
+namespace UnityMonoDllSourceCodePatcher.V35 {
 	sealed class ProjectInfo {
 		public readonly Guid OldGuid;
 		public readonly string OldGuidLowerString;

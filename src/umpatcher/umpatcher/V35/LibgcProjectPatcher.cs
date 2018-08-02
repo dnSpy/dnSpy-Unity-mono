@@ -17,7 +17,7 @@
     along with umpatcher.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-namespace UnityMonoDllSourceCodePatcher {
+namespace UnityMonoDllSourceCodePatcher.V35 {
 	sealed class LibgcProjectPatcher : ProjectPatcher {
 		public LibgcProjectPatcher(SolutionOptions solutionOptions)
 			: base(solutionOptions, solutionOptions?.LibgcProject) {

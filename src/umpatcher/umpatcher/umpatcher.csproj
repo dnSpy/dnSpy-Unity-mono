@@ -42,28 +42,29 @@
   <ItemGroup>
     <Compile Include="CommandLineParser.cs" />
     <Compile Include="Constants.cs" />
-    <Compile Include="EglibProjectPatcher.cs" />
     <Compile Include="Exec.cs" />
     <Compile Include="FileUtils.cs" />
-    <Compile Include="GenmdescProjectPatcher.cs" />
     <Compile Include="GitRepo.cs" />
     <Compile Include="GitUtils.cs" />
-    <Compile Include="LibgcProjectPatcher.cs" />
-    <Compile Include="LibmonoProjectPatcher.cs" />
     <Compile Include="LineReader.cs" />
-    <Compile Include="Patcher.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="ProgramOptions.cs" />
-    <Compile Include="ProjectInfo.cs" />
-    <Compile Include="ProjectPatcher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReadMePatcher.cs" />
-    <Compile Include="SolutionOptions.cs" />
-    <Compile Include="SolutionPatcher.cs" />
-    <Compile Include="SourceCodePatcher.cs" />
     <Compile Include="TextFilePatcher.cs" />
     <Compile Include="TextLine.cs" />
     <Compile Include="UnityVersion.cs" />
+    <Compile Include="V35\ConstantsV35.cs" />
+    <Compile Include="V35\EglibProjectPatcher.cs" />
+    <Compile Include="V35\GenmdescProjectPatcher.cs" />
+    <Compile Include="V35\LibgcProjectPatcher.cs" />
+    <Compile Include="V35\LibmonoProjectPatcher.cs" />
+    <Compile Include="V35\Patcher.cs" />
+    <Compile Include="V35\ProjectInfo.cs" />
+    <Compile Include="V35\ProjectPatcher.cs" />
+    <Compile Include="V35\SolutionOptions.cs" />
+    <Compile Include="V35\SolutionPatcher.cs" />
+    <Compile Include="V35\SourceCodePatcher.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -19,7 +19,7 @@
 
 using System.IO;
 
-namespace UnityMonoDllSourceCodePatcher {
+namespace UnityMonoDllSourceCodePatcher.V35 {
 	sealed class LibmonoProjectPatcher : ProjectPatcher {
 		public LibmonoProjectPatcher(SolutionOptions solutionOptions)
 			: base(solutionOptions, solutionOptions?.LibmonoProject) {
@@ -51,14 +51,14 @@ namespace UnityMonoDllSourceCodePatcher {
 		}
 
 		void PatchDebugInformationFormats() {
-			foreach (var itemDefInfo in GetItemDefinitionGroups(Constants.ReleaseConfigsWithNoPdb)) {
+			foreach (var itemDefInfo in GetItemDefinitionGroups(ConstantsV35.ReleaseConfigsWithNoPdb)) {
 				foreach (var info in GetTags("ClCompile", itemDefInfo.startTagIndex + 1, itemDefInfo.endTagIndex))
 					UpdateOrCreateTag(info.startTagIndex + 1, info.endTagIndex, "DebugInformationFormat", "None");
 			}
 		}
 
 		void PatchGenerateDebugInformationTags() {
-			foreach (var itemDefInfo in GetItemDefinitionGroups(Constants.ReleaseConfigsWithNoPdb)) {
+			foreach (var itemDefInfo in GetItemDefinitionGroups(ConstantsV35.ReleaseConfigsWithNoPdb)) {
 				foreach (var info in GetTags("Link", itemDefInfo.startTagIndex + 1, itemDefInfo.endTagIndex))
 					UpdateOrCreateTag(info.startTagIndex + 1, info.endTagIndex, "GenerateDebugInformation", "false");
 			}

@@ -22,7 +22,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace UnityMonoDllSourceCodePatcher {
+namespace UnityMonoDllSourceCodePatcher.V35 {
 	sealed class SourceCodePatcher {
 		readonly SolutionOptions solutionOptions;
 

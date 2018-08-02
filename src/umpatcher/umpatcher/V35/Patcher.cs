@@ -20,7 +20,7 @@
 using System;
 using System.IO;
 
-namespace UnityMonoDllSourceCodePatcher {
+namespace UnityMonoDllSourceCodePatcher.V35 {
 	sealed class Patcher {
 		readonly string unityVersion;
 		readonly string unityGitHash;
@@ -58,7 +58,7 @@ namespace UnityMonoDllSourceCodePatcher {
 			unityRepo.ThrowIfTreeNotClean();
 			dnSpyRepo.ThrowIfTreeNotClean();
 			FileUtils.CopyFilesFromTo(unityRepo.RepoPath, dnSpyVersionPath);
-			foreach (var dir in Constants.unityFoldersToCopy) {
+			foreach (var dir in ConstantsV35.unityFoldersToCopy) {
 				var sourceDir = Path.Combine(unityRepo.RepoPath, dir);
 				var destinationDir = Path.Combine(dnSpyVersionPath, dir);
 				FileUtils.CopyDirectoryFromTo(sourceDir, destinationDir);

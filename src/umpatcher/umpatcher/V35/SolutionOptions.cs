@@ -21,7 +21,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace UnityMonoDllSourceCodePatcher {
+namespace UnityMonoDllSourceCodePatcher.V35 {
 	sealed class SolutionOptions {
 		public readonly Guid SolutionDirGuid;
 
@@ -48,13 +48,13 @@ namespace UnityMonoDllSourceCodePatcher {
 		public SolutionOptions(string solutionDir, string versionPath, string windowsTargetPlatformVersion, string platformToolset) {
 			SolutionDirGuid = Guid.NewGuid();
 			SolutionDir = solutionDir ?? throw new ArgumentNullException(nameof(solutionDir));
-			SolutionFilename = Path.Combine(solutionDir, Constants.SolutionFilename);
+			SolutionFilename = Path.Combine(solutionDir, ConstantsV35.SolutionFilename);
 			UnityVersionDir = versionPath ?? throw new ArgumentNullException(nameof(versionPath));
 			var msvcPath = Path.Combine(versionPath, "msvc");
-			EglibProject = new ProjectInfo(Constants.OldGuid_eglib, Path.Combine(msvcPath, "eglib.vcxproj"));
-			GenmdescProject = new ProjectInfo(Constants.OldGuid_genmdesc, Path.Combine(msvcPath, "genmdesc.vcxproj"));
-			LibgcProject = new ProjectInfo(Constants.OldGuid_libgc, Path.Combine(msvcPath, "libgc.vcxproj"));
-			LibmonoProject = new ProjectInfo(Constants.OldGuid_libmono, Path.Combine(msvcPath, "libmono.vcxproj"));
+			EglibProject = new ProjectInfo(ConstantsV35.OldGuid_eglib, Path.Combine(msvcPath, "eglib.vcxproj"));
+			GenmdescProject = new ProjectInfo(ConstantsV35.OldGuid_genmdesc, Path.Combine(msvcPath, "genmdesc.vcxproj"));
+			LibgcProject = new ProjectInfo(ConstantsV35.OldGuid_libgc, Path.Combine(msvcPath, "libgc.vcxproj"));
+			LibmonoProject = new ProjectInfo(ConstantsV35.OldGuid_libmono, Path.Combine(msvcPath, "libmono.vcxproj"));
 			WindowsTargetPlatformVersion = windowsTargetPlatformVersion ?? throw new ArgumentNullException(nameof(windowsTargetPlatformVersion));
 			PlatformToolset = platformToolset ?? throw new ArgumentNullException(nameof(platformToolset));
 		}

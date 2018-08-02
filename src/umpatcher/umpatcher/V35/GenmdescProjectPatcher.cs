@@ -17,7 +17,7 @@
     along with umpatcher.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-namespace UnityMonoDllSourceCodePatcher {
+namespace UnityMonoDllSourceCodePatcher.V35 {
 	sealed class GenmdescProjectPatcher : ProjectPatcher {
 		public GenmdescProjectPatcher(SolutionOptions solutionOptions)
 			: base(solutionOptions, solutionOptions?.GenmdescProject) {

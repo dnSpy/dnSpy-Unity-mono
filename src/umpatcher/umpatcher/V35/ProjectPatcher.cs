@@ -22,7 +22,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 
-namespace UnityMonoDllSourceCodePatcher {
+namespace UnityMonoDllSourceCodePatcher.V35 {
 	abstract class ProjectPatcher {
 		protected readonly SolutionOptions solutionOptions;
 		protected readonly ProjectInfo project;
@@ -59,7 +59,7 @@ namespace UnityMonoDllSourceCodePatcher {
 			var line = lines[index];
 			if (line.IsRemoved || !line.Text.Contains("<Project"))
 				return false;
-			var newString = line.Text.Replace(Constants.OldProjectToolsVersion, Constants.NewProjectToolsVersion);
+			var newString = line.Text.Replace(ConstantsV35.OldProjectToolsVersion, ConstantsV35.NewProjectToolsVersion);
 			if (newString == line.Text)
 				return false;
 			lines[index] = line.Replace(newString);
@@ -173,7 +173,7 @@ namespace UnityMonoDllSourceCodePatcher {
 			textFilePatcher.Replace(line => {
 				if (!line.Text.Contains("<PreprocessorDefinitions>"))
 					return line;
-				return line.Replace(line.Text.Replace(Constants.OldWinVer, Constants.NewWinVer));
+				return line.Replace(line.Text.Replace(ConstantsV35.OldWinVer, ConstantsV35.NewWinVer));
 			});
 
 		protected void RemoveBrowseInformationTags() => textFilePatcher.RemoveLines(line => line.Text.Contains("<BrowseInformation"));

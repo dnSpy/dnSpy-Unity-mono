@@ -18,6 +18,7 @@
 */
 
 using System;
+using UnityMonoDllSourceCodePatcher.V35;
 
 namespace UnityMonoDllSourceCodePatcher {
 	enum ExitCodes {

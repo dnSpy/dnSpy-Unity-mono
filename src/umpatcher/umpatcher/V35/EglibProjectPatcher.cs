@@ -17,7 +17,7 @@
     along with umpatcher.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-namespace UnityMonoDllSourceCodePatcher {
+namespace UnityMonoDllSourceCodePatcher.V35 {
 	sealed class EglibProjectPatcher : ProjectPatcher {
 		public EglibProjectPatcher(SolutionOptions solutionOptions)
 			: base(solutionOptions, solutionOptions?.EglibProject) {
