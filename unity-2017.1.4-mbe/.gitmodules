@@ -1,0 +1,55 @@
+[submodule "external/aspnetwebstack"]
+	path = external/aspnetwebstack
+	url = git://github.com/mono/aspnetwebstack.git
+[submodule "external/Newtonsoft.Json"]
+	path = external/Newtonsoft.Json
+	url = git://github.com/mono/Newtonsoft.Json.git
+[submodule "external/cecil"]
+	path = external/cecil
+	url = git://github.com/mono/cecil.git
+[submodule "external/debian-snapshot"]
+	path = external/debian-snapshot
+	url = git://github.com/directhex/mono-snapshot.git
+[submodule "external/rx"]
+	path = external/rx
+	url = git://github.com/mono/rx.git
+	branch = rx-oss-v2.2
+[submodule "external/ikvm"]
+	path = external/ikvm
+	url = git://github.com/mono/ikvm-fork.git
+[submodule "external/ikdasm"]
+	path = external/ikdasm
+	url = git://github.com/mono/ikdasm.git
+[submodule "external/reference-assemblies"]
+	path = external/binary-reference-assemblies
+	url = git://github.com/mono/reference-assemblies.git
+[submodule "external/Lucene.Net.Light"]
+	path = external/Lucene.Net.Light
+	url = git://github.com/mono/Lucene.Net.Light.git
+[submodule "external/nunit-lite"]
+	path = external/nunit-lite
+	url = git://github.com/mono/NUnitLite.git
+[submodule "external/buildscripts"]
+	path = external/buildscripts
+	url = git@github.com:Unity-Technologies/monobuildtools.git
+	branch = unity-mono-4.8.0-branch
+[submodule "external/nuget-buildtasks"]
+	path = external/nuget-buildtasks
+	url = git://github.com/mono/NuGet.BuildTasks
+[submodule "external/buildtools"]
+	path = external/buildtools
+	url = git://github.com/mono/buildtools.git
+[submodule "external/cecil-legacy"]
+	path = external/cecil-legacy
+	url = git://github.com/mono/cecil.git
+	branch = mono-legacy-0.9.5
+[submodule "external/boringssl"]
+	path = external/boringssl
+	url = git://github.com/mono/boringssl.git
+	branch = mono
+[submodule "external/bdwgc"]
+	path = external/bdwgc
+	url = git://github.com/Unity-Technologies/bdwgc.git
+[submodule "external/libatomic_ops"]
+	path = external/libatomic_ops
+	url = https://github.com/Unity-Technologies/libatomic_ops.git
