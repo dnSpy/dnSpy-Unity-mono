@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -130,6 +130,7 @@
     <ClInclude Include="..\mono\mini\mini-gc.h" />
     <ClCompile Include="..\mono\mini\mini-gc.c" />
     <ClInclude Include="..\mono\mini\debugger-agent.h " />
+    <ClCompile Include="..\mono\mini\dnSpy.c" />
     <ClCompile Include="..\mono\mini\debugger-agent.c" />
     <ClCompile Include="..\mono\mini\xdebug.c" />
     <ClInclude Include="..\mono\mini\mini-llvm.h" />
@@ -139,30 +140,30 @@
     <ClCompile Include="..\mono\mini\lldb.c" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{CB0D9E92-293C-439C-9AC7-C5F59B6E0772}</ProjectGuid>
+    <ProjectGuid>{1B7B4259-3C17-405A-9361-139CFC109914}</ProjectGuid>
     <RootNamespace>libmono-static</RootNamespace>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -227,7 +228,7 @@
       <SubSystem>Windows</SubSystem>
     </Link>
     <PostBuildEvent>
-      <Command>.\libmono.bat "$(MONO_INCLUDE_DIR)" "$(SolutionDir)include\mono" -q</Command>
+      <Command>.\libmono.bat "$(MONO_INCLUDE_DIR)" "$(MSBuildProjectDirectory)\include\mono" -q</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -253,7 +254,7 @@
       <SubSystem>Windows</SubSystem>
     </Link>
     <PostBuildEvent>
-      <Command>.\libmono.bat "$(MONO_INCLUDE_DIR)" "$(SolutionDir)include\mono" -q</Command>
+      <Command>.\libmono.bat "$(MONO_INCLUDE_DIR)" "$(MSBuildProjectDirectory)\include\mono" -q</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -278,7 +279,7 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <PostBuildEvent>
-      <Command>.\libmono.bat "$(MONO_INCLUDE_DIR)" "$(SolutionDir)include\mono" -q</Command>
+      <Command>.\libmono.bat "$(MONO_INCLUDE_DIR)" "$(MSBuildProjectDirectory)\include\mono" -q</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -303,7 +304,7 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <PostBuildEvent>
-      <Command>.\libmono.bat "$(MONO_INCLUDE_DIR)" "$(SolutionDir)include\mono" -q</Command>
+      <Command>.\libmono.bat "$(MONO_INCLUDE_DIR)" "$(MSBuildProjectDirectory)\include\mono" -q</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -318,22 +319,16 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="eglib.vcxproj">
-      <Project>{158073ed-99ae-4196-9edc-ddb2344f8466}</Project>
+      <Project>{2d0a51ae-8a8c-4e78-84d4-e6990df53453}</Project>
     </ProjectReference>
     <ProjectReference Include="genmdesc.vcxproj">
-      <Project>{b7098dfa-31e6-4006-8a15-1c9a4e925149}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libgc.vcxproj">
-      <Project>{eb56000b-c80b-4e8b-908d-d84d31b517d3}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libgcmonosgen.vcxproj">
-      <Project>{c36612bd-22d3-4b95-85e2-7fdc4fc5d740}</Project>
+      <Project>{d51a3b8f-45d8-49f8-bb96-0d00b63f7a2a}</Project>
     </ProjectReference>
     <ProjectReference Include="libmonoruntime.vcxproj">
-      <Project>{c36612bd-22d3-4b95-85e2-7fdc4fc5d739}</Project>
+      <Project>{42702337-625d-418e-9167-59d0e2ddd3d9}</Project>
     </ProjectReference>
     <ProjectReference Include="libmonoutils.vcxproj">
-      <Project>{8fc2b0c8-51ad-49df-851f-5d01a77a75e4}</Project>
+      <Project>{d955254d-5918-42d3-889b-29c19e1aebb6}</Project>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
