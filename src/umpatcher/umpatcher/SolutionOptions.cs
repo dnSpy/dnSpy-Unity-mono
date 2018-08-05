@@ -22,39 +22,25 @@ using System.Collections.Generic;
 using System.IO;
 
 namespace UnityMonoDllSourceCodePatcher {
-	sealed class SolutionOptions {
+	abstract class SolutionOptions {
 		public readonly Guid SolutionDirGuid;
-
-		public string SolutionDir { get; }
-		public string SolutionFilename { get; }
-		public string UnityVersionDir { get; }
-
-		public readonly ProjectInfo EglibProject;
-		public readonly ProjectInfo GenmdescProject;
-		public readonly ProjectInfo LibgcProject;
-		public readonly ProjectInfo LibmonoProject;
-		public IEnumerable<ProjectInfo> AllProjects {
-			get {
-				yield return EglibProject;
-				yield return GenmdescProject;
-				yield return LibgcProject;
-				yield return LibmonoProject;
-			}
-		}
-
+		public readonly string SolutionFilename;
+		public readonly string UnityVersionDir;
 		public readonly string WindowsTargetPlatformVersion;
 		public readonly string PlatformToolset;
+		public readonly UnityVersion UnityVersion;
 
-		public SolutionOptions(string solutionDir, string versionPath, string windowsTargetPlatformVersion, string platformToolset) {
+		public abstract IEnumerable<ProjectInfo> AllProjects { get; }
+		public abstract string[] SolutionConfigurations { get; }
+		public abstract (string archName, string configName)[] SolutionPlatforms { get; }
+		public abstract string[] SolutionBuildInfos { get; }
+
+		protected SolutionOptions(string solutionDir, string versionPath, string unityVersion, string windowsTargetPlatformVersion, string platformToolset, string solutionFilename) {
 			SolutionDirGuid = Guid.NewGuid();
-			SolutionDir = solutionDir ?? throw new ArgumentNullException(nameof(solutionDir));
-			SolutionFilename = Path.Combine(solutionDir, Constants.SolutionFilename);
+			SolutionFilename = Path.Combine(solutionDir, solutionFilename);
+			if (!UnityVersion.TryParse(unityVersion, out UnityVersion))
+				throw new InvalidOperationException($"Invalid version: {unityVersion}");
 			UnityVersionDir = versionPath ?? throw new ArgumentNullException(nameof(versionPath));
-			var msvcPath = Path.Combine(versionPath, "msvc");
-			EglibProject = new ProjectInfo(Constants.OldGuid_eglib, Path.Combine(msvcPath, "eglib.vcxproj"));
-			GenmdescProject = new ProjectInfo(Constants.OldGuid_genmdesc, Path.Combine(msvcPath, "genmdesc.vcxproj"));
-			LibgcProject = new ProjectInfo(Constants.OldGuid_libgc, Path.Combine(msvcPath, "libgc.vcxproj"));
-			LibmonoProject = new ProjectInfo(Constants.OldGuid_libmono, Path.Combine(msvcPath, "libmono.vcxproj"));
 			WindowsTargetPlatformVersion = windowsTargetPlatformVersion ?? throw new ArgumentNullException(nameof(windowsTargetPlatformVersion));
 			PlatformToolset = platformToolset ?? throw new ArgumentNullException(nameof(platformToolset));
 		}

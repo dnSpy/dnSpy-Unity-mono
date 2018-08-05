@@ -17,26 +17,19 @@
     along with umpatcher.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-using System;
-
-namespace UnityMonoDllSourceCodePatcher {
-	sealed class ProjectInfo {
-		public readonly Guid OldGuid;
-		public readonly string OldGuidLowerString;
-		public readonly string OldGuidUpperString;
-		public readonly Guid Guid;
-		public readonly string NewGuidLowerString;
-		public readonly string NewGuidUpperString;
-		public readonly string Filename;
-
-		public ProjectInfo(Guid oldGuid, string filename) {
-			OldGuid = oldGuid;
-			OldGuidLowerString = oldGuid.ToString();
-			OldGuidUpperString = OldGuidLowerString.ToUpperInvariant();
-			Guid = Guid.NewGuid();
-			NewGuidLowerString = Guid.ToString();
-			NewGuidUpperString = NewGuidLowerString.ToUpperInvariant();
-			Filename = filename;
+namespace UnityMonoDllSourceCodePatcher.V35 {
+	abstract class ProjectPatcherV35 : ProjectPatcher {
+		protected ProjectPatcherV35(SolutionOptions solutionOptions, ProjectInfo project)
+			: base(solutionOptions, project, ConstantsV35.OldProjectToolsVersion, ConstantsV35.NewProjectToolsVersion) {
 		}
+
+		protected void PatchPreprocessorDefinitions() =>
+			textFilePatcher.Replace(line => {
+				if (!line.Text.Contains("<PreprocessorDefinitions>"))
+					return line;
+				return line.Replace(line.Text.Replace(ConstantsV35.OldWinVer, ConstantsV35.NewWinVer));
+			});
+
+		protected void RemoveBrowseInformationTags() => textFilePatcher.RemoveLines(line => line.Text.Contains("<BrowseInformation"));
 	}
 }

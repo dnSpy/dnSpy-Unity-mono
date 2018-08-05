@@ -54,7 +54,7 @@ namespace UnityMonoDllSourceCodePatcher {
 	}
 
 	sealed class VersionTableComparer : IComparer<TextLine> {
-		public static VersionTableComparer Instance = new VersionTableComparer();
+		public static readonly VersionTableComparer Instance = new VersionTableComparer();
 		VersionTableComparer() { }
 
 		public int Compare(TextLine x, TextLine y) {

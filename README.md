@@ -1,12 +1,6 @@
-This repo contains all files needed to build mono.dll with debugging support for Unity.
+This repo contains all files needed to build `mono.dll` & `mono-2.0-bdwgc.dll` with debugging support for Unity.
 
-The master branch contains the original files. You have to check out the `dnSpy` branch to build everything. Use VS2017.
-
-# Known issues
-
-> mono.dll sometimes crashes in `mono_unwind_frame`
-
-Workaround: Compile a debug build (`Debug_eglib`) instead of a release build (`Release_eglib`)
+The `master` branch contains the original files. You have to check out the `dnSpy` branch to build everything. Use VS2017.
 
 # Supporting a new Unity version for Dummies
 
@@ -17,12 +11,14 @@ Workaround: Compile a debug build (`Debug_eglib`) instead of a release build (`R
 	- https://unity3d.com/get-unity/download/archive
 	- https://unity3d.com/unity/qa/lts-releases
 	- https://unity3d.com/unity/qa/patch-releases
-- Locate the compiled mono.dll files, eg.:
+- Locate the compiled `mono.dll` & `mono-2.0-bdwgc.dll` files, eg.:
 	- `C:\Program Files\Unity\Editor\Data\PlaybackEngines\windowsstandalonesupport\Variations\win32_nondevelopment_mono\Data\Mono\EmbedRuntime\mono.dll`
 	- `C:\Program Files\Unity\Editor\Data\PlaybackEngines\windowsstandalonesupport\Variations\win64_nondevelopment_mono\Data\Mono\EmbedRuntime\mono.dll`
+	- `C:\Program Files\Unity\Editor\Data\PlaybackEngines\windowsstandalonesupport\Variations\win64_development_mono\MonoBleedingEdge\EmbedRuntime\mono-2.0-bdwgc.dll`
+	- `C:\Program Files\Unity\Editor\Data\PlaybackEngines\windowsstandalonesupport\Variations\win64_nondevelopment_mono\MonoBleedingEdge\EmbedRuntime\mono-2.0-bdwgc.dll`
 - Get the timestamp stored in mono.dll's PE header
 	- `umpatcher --timestamp "C:\path\to\the\correct\version\mono.dll"`
-- Check out the correct version branch in the Unity mono repo, eg. if it's v5.4.3, the branch is called `unity-5.4`
+- Check out the correct version branch in the Unity mono repo, eg. if it's v5.4.3, the branch is called `unity-5.4`. Branches ending in `-mbe` use .NET 4.x assemblies.
 	- Use `git branch -a` to see all remote branches
 - `git checkout unity-5.4` (or whatever version you need)
 - `git pull` (make sure it has the latest stuff)
@@ -32,14 +28,19 @@ Workaround: Compile a debug build (`Debug_eglib`) instead of a release build (`R
 - Run umpatcher again to patch the code and commit it to the dnSpy-Unity-mono repo
 	- `umpatcher 5.4.3 aa8a6e7afc2f4fe63921df4fe8a18cfd0a441d19 "C:\path\to\Unity-mono" "C:\path\to\dnSpy-Unity-mono"`
 
-# Building mono.dll
+# Building `mono.dll` & `mono-2.0-bdwgc.dll`
 
-- Use configuration `Release_eglib`
-- Use platform `x86` or `x64`
+- `dnSpy-Unity-mono.sln` (Unity with .NET 2.0-3.5 assemblies)
+	- Use configuration `Release_eglib`
+	- Use platform `x86` or `x64`
+
+- `dnSpy-Unity-mono-V40.sln` (Unity with .NET 4.x assemblies)
+	- Use configuration `Release`
+	- Use platform `x86` or `x64`
 
 # Commit hashes
 
-A few versions have the same hash.
+A few versions have the same hash. `-mbe` = `MonoBleedingEdge` branch (.NET 4.x assemblies).
 
 version | git hash
 --------|---------

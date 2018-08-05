@@ -17,10 +17,10 @@
     along with umpatcher.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-namespace UnityMonoDllSourceCodePatcher {
-	sealed class GenmdescProjectPatcher : ProjectPatcher {
-		public GenmdescProjectPatcher(SolutionOptions solutionOptions)
-			: base(solutionOptions, solutionOptions?.GenmdescProject) {
+namespace UnityMonoDllSourceCodePatcher.V40 {
+	sealed class BuildInitProjectPatcher : ProjectPatcherV40 {
+		public BuildInitProjectPatcher(SolutionOptionsV40 solutionOptions)
+			: base(solutionOptions, solutionOptions?.BuildInitProject) {
 		}
 
 		protected override void PatchCore() { }

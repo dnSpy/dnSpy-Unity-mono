@@ -89,8 +89,38 @@ namespace UnityMonoDllSourceCodePatcher {
 				options.WindowsTargetPlatformVersion = Constants.DefaultWindowsTargetPlatformVersion;
 			if (options.PlatformToolset == null)
 				options.PlatformToolset = Constants.DefaultPlatformToolset;
-			var patcher = new Patcher(options.UnityVersion, options.UnityGitHash, options.UnityRepoPath, options.DnSpyUnityMonoRepoPath, options.GitExePath, options.WindowsTargetPlatformVersion, options.PlatformToolset);
+
+			Patcher patcher;
+			switch (GetPatcherKind(options.UnityVersion)) {
+			default:
+			case PatcherKind.Unknown:
+				throw new ProgramException("Invalid version number");
+
+			case PatcherKind.V35:
+				patcher = new V35.PatcherV35(options.UnityVersion, options.UnityGitHash, options.UnityRepoPath, options.DnSpyUnityMonoRepoPath, options.GitExePath, options.WindowsTargetPlatformVersion, options.PlatformToolset);
+				break;
+
+			case PatcherKind.V40:
+				patcher = new V40.PatcherV40(options.UnityVersion, options.UnityGitHash, options.UnityRepoPath, options.DnSpyUnityMonoRepoPath, options.GitExePath, options.WindowsTargetPlatformVersion, options.PlatformToolset);
+				break;
+			}
 			patcher.Patch();
+		}
+
+		static PatcherKind GetPatcherKind(string unityVersion) {
+			if (!UnityVersion.TryParse(unityVersion, out var version))
+				throw new ProgramException("Invalid version number");
+			if (version.Extra == string.Empty)
+				return PatcherKind.V35;
+			if (version.Extra == "-mbe")
+				return PatcherKind.V40;
+			return PatcherKind.Unknown;
+		}
+
+		enum PatcherKind {
+			Unknown,
+			V35,
+			V40,
 		}
 	}
 }

@@ -17,13 +17,12 @@
     along with umpatcher.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-namespace UnityMonoDllSourceCodePatcher {
-	sealed class EglibProjectPatcher : ProjectPatcher {
-		public EglibProjectPatcher(SolutionOptions solutionOptions)
-			: base(solutionOptions, solutionOptions?.EglibProject) {
+namespace UnityMonoDllSourceCodePatcher.V40 {
+	sealed class LibgcbdwgcProjectPatcher : ProjectPatcherV40 {
+		public LibgcbdwgcProjectPatcher(SolutionOptionsV40 solutionOptions)
+			: base(solutionOptions, solutionOptions?.LibgcbdwgcProject) {
 		}
 
-		protected override void PatchCore() =>
-			UpdateTreatWarningAsError("false");
+		protected override void PatchCore() { }
 	}
 }

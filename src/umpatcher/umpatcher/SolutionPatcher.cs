@@ -23,6 +23,7 @@ using System.IO;
 namespace UnityMonoDllSourceCodePatcher {
 	sealed class SolutionPatcher {
 		readonly SolutionOptions solutionOptions;
+		readonly string solutionDir;
 		readonly TextFilePatcher textFilePatcher;
 		readonly Guid unityVersionDirGuid;
 		static readonly Guid solutionDirGuid = new Guid("2150E333-8FDC-42A3-9474-1A3956D46DE8");
@@ -30,6 +31,7 @@ namespace UnityMonoDllSourceCodePatcher {
 
 		public SolutionPatcher(SolutionOptions solutionOptions) {
 			this.solutionOptions = solutionOptions ?? throw new ArgumentNullException(nameof(solutionOptions));
+			solutionDir = Path.GetDirectoryName(solutionOptions.SolutionFilename);
 			textFilePatcher = new TextFilePatcher(solutionOptions.SolutionFilename);
 			unityVersionDirGuid = Guid.NewGuid();
 		}
@@ -44,7 +46,7 @@ namespace UnityMonoDllSourceCodePatcher {
 		}
 
 		void AddProjects() {
-			int index = textFilePatcher.GetLastIndexOfLine("EndProject") + 1;
+			int index = textFilePatcher.GetIndexOfLine("Global");
 			AddProjectDir(ref index);
 			foreach (var project in solutionOptions.AllProjects)
 				AddProject(ref index, project);
@@ -62,9 +64,9 @@ namespace UnityMonoDllSourceCodePatcher {
 		}
 
 		string GetProjectRelativePath(ProjectInfo project) {
-			if (!project.Filename.StartsWith(solutionOptions.SolutionDir, StringComparison.OrdinalIgnoreCase))
+			if (!project.Filename.StartsWith(solutionDir, StringComparison.OrdinalIgnoreCase))
 				throw new ProgramException("Invalid solution dir");
-			var relName = project.Filename.Substring(solutionOptions.SolutionDir.Length + 1);
+			var relName = project.Filename.Substring(solutionDir.Length + 1);
 			return relName.Replace('/', '\\');
 		}
 
@@ -76,13 +78,13 @@ namespace UnityMonoDllSourceCodePatcher {
 		}
 
 		void AddProjectConfigurationPlatforms() {
-			int index = textFilePatcher.GetIndexOfLine(Constants.Solution_ProjectConfigurationPlatforms_Line);
-			index = textFilePatcher.GetIndexOfLine(Constants.Solution_EndGlobalSection_Line, index);
+			int index = textFilePatcher.GetIndexOfLine("\tGlobalSection(ProjectConfigurationPlatforms) = postSolution");
+			index = textFilePatcher.GetIndexOfLine("\tEndGlobalSection", index);
 			foreach (var project in solutionOptions.AllProjects) {
 				var projectGuidString = ToString(project.Guid);
-				foreach (var config in Constants.SolutionConfigurations) {
-					foreach (var info in Constants.SolutionPlatforms) {
-						foreach (var buildInfo in Constants.SolutionBuildInfos)
+				foreach (var config in solutionOptions.SolutionConfigurations) {
+					foreach (var info in solutionOptions.SolutionPlatforms) {
+						foreach (var buildInfo in solutionOptions.SolutionBuildInfos)
 							textFilePatcher.Insert(index++, $"\t\t{projectGuidString}.{config}|{info.archName}.{buildInfo} = {config}|{info.configName}");
 					}
 				}
@@ -90,8 +92,8 @@ namespace UnityMonoDllSourceCodePatcher {
 		}
 
 		void AddNestedProjects() {
-			int index = textFilePatcher.GetIndexOfLine(Constants.Solution_NestedProjects_Line);
-			index = textFilePatcher.GetIndexOfLine(Constants.Solution_EndGlobalSection_Line, index);
+			int index = textFilePatcher.GetIndexOfLine("\tGlobalSection(NestedProjects) = preSolution");
+			index = textFilePatcher.GetIndexOfLine("\tEndGlobalSection", index);
 			foreach (var project in solutionOptions.AllProjects) {
 				var projectGuidString = ToString(project.Guid);
 				var unityVersionDirGuidString = ToString(unityVersionDirGuid);
