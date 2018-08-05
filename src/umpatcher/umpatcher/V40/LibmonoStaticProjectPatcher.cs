@@ -17,26 +17,28 @@
     along with umpatcher.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+namespace UnityMonoDllSourceCodePatcher.V40 {
+	sealed class LibmonoStaticProjectPatcher : ProjectPatcherV40 {
+		new readonly SolutionOptionsV40 solutionOptions;
 
-namespace UnityMonoDllSourceCodePatcher.V35 {
-	sealed class LibmonoProjectPatcher : ProjectPatcherV35 {
-		public LibmonoProjectPatcher(SolutionOptionsV35 solutionOptions)
-			: base(solutionOptions, solutionOptions?.LibmonoProject) {
+		public LibmonoStaticProjectPatcher(SolutionOptionsV40 solutionOptions)
+			: base(solutionOptions, solutionOptions?.LibmonoStaticProject) {
+			this.solutionOptions = solutionOptions;
 		}
 
 		protected override void PatchCore() {
-			PatchOutDirs();
-			PatchPreprocessorDefinitions();
-			RemoveBrowseInformationTags();
-			PatchDebugInformationFormats(ConstantsV35.ReleaseConfigsWithNoPdb);
-			PatchGenerateDebugInformationTags(ConstantsV35.ReleaseConfigsWithNoPdb);
 			AddSourceFiles();
+			RemoveProjectReference("libgc.vcxproj");
+			RemoveProjectReference("libgcmonosgen.vcxproj");
+			PatchSolutionDir();
 		}
 
 		void AddSourceFiles() {
-			int index = textFilePatcher.GetIndexOfLine(line => line.Text.Contains(@"<ClCompile Include=""..\mono\utils\dlmalloc.c"""));
-			var indent = textFilePatcher.GetLeadingWhitespace(index);
-			textFilePatcher.Insert(index, indent + @"<ClCompile Include=""..\mono\mini\dnSpy.c"" />");
+			if (solutionOptions.LibmonoDynamicProject == null) {
+				int index = textFilePatcher.GetIndexOfLine(line => line.Text.Contains(@"<ClCompile Include=""..\mono\mini\debugger-agent.c"""));
+				var indent = textFilePatcher.GetLeadingWhitespace(index);
+				textFilePatcher.Insert(index, indent + @"<ClCompile Include=""..\mono\mini\dnSpy.c"" />");
+			}
 		}
 	}
 }

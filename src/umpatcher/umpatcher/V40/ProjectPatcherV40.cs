@@ -17,12 +17,20 @@
     along with umpatcher.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-namespace UnityMonoDllSourceCodePatcher.V35 {
-	sealed class LibgcProjectPatcher : ProjectPatcherV35 {
-		public LibgcProjectPatcher(SolutionOptionsV35 solutionOptions)
-			: base(solutionOptions, solutionOptions?.LibgcProject) {
+namespace UnityMonoDllSourceCodePatcher.V40 {
+	abstract class ProjectPatcherV40 : ProjectPatcher {
+		protected ProjectPatcherV40(SolutionOptions solutionOptions, ProjectInfo project)
+			: base(solutionOptions, project, ConstantsV40.OldProjectToolsVersion, ConstantsV40.NewProjectToolsVersion) {
 		}
 
-		protected override void PatchCore() { }
+		protected void PatchSolutionDir() {
+			textFilePatcher.Replace(line => {
+				const string SOLUTION_DIR = "$(SolutionDir)";
+				if (!line.Text.Contains(SOLUTION_DIR))
+					return line;
+				var newText = line.Text.Replace(SOLUTION_DIR, @"$(MSBuildProjectDirectory)\");
+				return line.Replace(newText);
+			});
+		}
 	}
 }

@@ -17,12 +17,26 @@
     along with umpatcher.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-namespace UnityMonoDllSourceCodePatcher.V35 {
-	sealed class LibgcProjectPatcher : ProjectPatcherV35 {
-		public LibgcProjectPatcher(SolutionOptionsV35 solutionOptions)
-			: base(solutionOptions, solutionOptions?.LibgcProject) {
-		}
+using System;
 
-		protected override void PatchCore() { }
+namespace UnityMonoDllSourceCodePatcher {
+	sealed class ProjectInfo {
+		public readonly Guid OldGuid;
+		public readonly string OldGuidLowerString;
+		public readonly string OldGuidUpperString;
+		public readonly Guid Guid;
+		public readonly string NewGuidLowerString;
+		public readonly string NewGuidUpperString;
+		public readonly string Filename;
+
+		public ProjectInfo(Guid oldGuid, string filename) {
+			OldGuid = oldGuid;
+			OldGuidLowerString = oldGuid.ToString();
+			OldGuidUpperString = OldGuidLowerString.ToUpperInvariant();
+			Guid = Guid.NewGuid();
+			NewGuidLowerString = Guid.ToString();
+			NewGuidUpperString = NewGuidLowerString.ToUpperInvariant();
+			Filename = filename;
+		}
 	}
 }

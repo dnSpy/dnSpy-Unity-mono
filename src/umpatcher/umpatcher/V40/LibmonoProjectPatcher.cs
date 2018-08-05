@@ -17,12 +17,23 @@
     along with umpatcher.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-namespace UnityMonoDllSourceCodePatcher.V35 {
-	sealed class LibgcProjectPatcher : ProjectPatcherV35 {
-		public LibgcProjectPatcher(SolutionOptionsV35 solutionOptions)
-			: base(solutionOptions, solutionOptions?.LibgcProject) {
+namespace UnityMonoDllSourceCodePatcher.V40 {
+	sealed class LibmonoProjectPatcher : ProjectPatcherV40 {
+		readonly ProjectInfo libgcbdwgcProject;
+
+		public LibmonoProjectPatcher(SolutionOptionsV40 solutionOptions)
+			: base(solutionOptions, solutionOptions?.LibmonoProject) {
+			libgcbdwgcProject = solutionOptions.LibgcbdwgcProject;
 		}
 
-		protected override void PatchCore() { }
+		protected override void PatchCore() {
+			PatchOutDirs();
+			PatchDebugInformationFormats(ConstantsV40.ReleaseConfigsWithNoPdb);
+			PatchGenerateDebugInformationTags(ConstantsV40.ReleaseConfigsWithNoPdb);
+			AddProjectReference(libgcbdwgcProject);
+			RemoveProjectReference("libgc.vcxproj");
+			RemoveProjectReference("libgcmonosgen.vcxproj");
+			PatchSolutionDir();
+		}
 	}
 }

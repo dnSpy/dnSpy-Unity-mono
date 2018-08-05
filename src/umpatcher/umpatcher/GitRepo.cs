@@ -42,6 +42,18 @@ namespace UnityMonoDllSourceCodePatcher {
 				ThrowError("Git working tree is not clean. Check in the modified files.");
 		}
 
+		public void SubmoduleInit() {
+			int result = Exec.Run(repoPath, gitPath, "submodule init");
+			if (result != 0)
+				ThrowError($"Git submodule init failed with error code {result}");
+		}
+
+		public void SubmoduleUpdate(string path) {
+			int result = Exec.Run(repoPath, gitPath, $"submodule update {path}");
+			if (result != 0)
+				ThrowError($"Git submodule update {path} failed with error code {result}");
+		}
+
 		public void CheckOut(string hashOrBranchName) {
 			int result = Exec.Run(repoPath, gitPath, $"checkout {hashOrBranchName}");
 			if (result != 0)

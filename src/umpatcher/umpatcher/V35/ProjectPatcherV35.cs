@@ -18,11 +18,18 @@
 */
 
 namespace UnityMonoDllSourceCodePatcher.V35 {
-	sealed class LibgcProjectPatcher : ProjectPatcherV35 {
-		public LibgcProjectPatcher(SolutionOptionsV35 solutionOptions)
-			: base(solutionOptions, solutionOptions?.LibgcProject) {
+	abstract class ProjectPatcherV35 : ProjectPatcher {
+		protected ProjectPatcherV35(SolutionOptions solutionOptions, ProjectInfo project)
+			: base(solutionOptions, project, ConstantsV35.OldProjectToolsVersion, ConstantsV35.NewProjectToolsVersion) {
 		}
 
-		protected override void PatchCore() { }
+		protected void PatchPreprocessorDefinitions() =>
+			textFilePatcher.Replace(line => {
+				if (!line.Text.Contains("<PreprocessorDefinitions>"))
+					return line;
+				return line.Replace(line.Text.Replace(ConstantsV35.OldWinVer, ConstantsV35.NewWinVer));
+			});
+
+		protected void RemoveBrowseInformationTags() => textFilePatcher.RemoveLines(line => line.Text.Contains("<BrowseInformation"));
 	}
 }

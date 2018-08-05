@@ -17,25 +17,12 @@
     along with umpatcher.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-using System;
-
-namespace UnityMonoDllSourceCodePatcher.V35 {
-	sealed class ProjectInfo {
-		public readonly Guid OldGuid;
-		public readonly string OldGuidLowerString;
-		public readonly string OldGuidUpperString;
-		public readonly Guid Guid;
-		public readonly string NewGuidLowerString;
-		public readonly string NewGuidUpperString;
-		public readonly string Filename;
-		public ProjectInfo(Guid oldGuid, string filename) {
-			OldGuid = oldGuid;
-			OldGuidLowerString = oldGuid.ToString();
-			OldGuidUpperString = OldGuidLowerString.ToUpperInvariant();
-			Guid = Guid.NewGuid();
-			NewGuidLowerString = Guid.ToString();
-			NewGuidUpperString = NewGuidLowerString.ToUpperInvariant();
-			Filename = filename;
+namespace UnityMonoDllSourceCodePatcher.V40 {
+	sealed class LibgcbdwgcProjectPatcher : ProjectPatcherV40 {
+		public LibgcbdwgcProjectPatcher(SolutionOptionsV40 solutionOptions)
+			: base(solutionOptions, solutionOptions?.LibgcbdwgcProject) {
 		}
+
+		protected override void PatchCore() { }
 	}
 }

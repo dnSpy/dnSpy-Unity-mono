@@ -24,9 +24,9 @@ using System.Text;
 
 namespace UnityMonoDllSourceCodePatcher.V35 {
 	sealed class SourceCodePatcher {
-		readonly SolutionOptions solutionOptions;
+		readonly SolutionOptionsV35 solutionOptions;
 
-		public SourceCodePatcher(SolutionOptions solutionOptions) =>
+		public SourceCodePatcher(SolutionOptionsV35 solutionOptions) =>
 			this.solutionOptions = solutionOptions ?? throw new ArgumentNullException(nameof(solutionOptions));
 
 		public void Patch() {

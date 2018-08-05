@@ -18,24 +18,23 @@
 */
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 
-namespace UnityMonoDllSourceCodePatcher.V35 {
-	sealed class Patcher {
+namespace UnityMonoDllSourceCodePatcher {
+	abstract class Patcher {
 		readonly string unityVersion;
 		readonly string unityGitHash;
 		readonly GitRepo unityRepo;
-		readonly GitRepo dnSpyRepo;
-		readonly string dnSpyVersionPath;
-		readonly SolutionOptions solutionOptions;
+		protected readonly GitRepo dnSpyRepo;
+		protected readonly string dnSpyVersionPath;
 
-		public Patcher(string unityVersion, string unityGitHash, string unityRepoPath, string dnSpyUnityMonoRepoPath, string gitExePath, string windowsTargetPlatformVersion, string platformToolset) {
+		protected Patcher(string unityVersion, string unityGitHash, string unityRepoPath, string dnSpyUnityMonoRepoPath, string gitExePath) {
 			this.unityVersion = unityVersion ?? throw new ArgumentNullException(nameof(unityVersion));
 			this.unityGitHash = unityGitHash ?? throw new ArgumentNullException(nameof(unityGitHash));
 			unityRepo = new GitRepo(gitExePath, unityRepoPath);
 			dnSpyRepo = new GitRepo(gitExePath, dnSpyUnityMonoRepoPath);
 			dnSpyVersionPath = Path.Combine(dnSpyUnityMonoRepoPath, Constants.UnityVersionPrefix + unityVersion);
-			solutionOptions = new SolutionOptions(dnSpyRepo.RepoPath, dnSpyVersionPath, windowsTargetPlatformVersion, platformToolset);
 		}
 
 		void Log(string message) => Console.WriteLine(message);
@@ -49,18 +48,29 @@ namespace UnityMonoDllSourceCodePatcher.V35 {
 			PatchOriginalFiles();
 		}
 
+		protected abstract string[] Submodules { get; }
+		protected abstract string[] UnityFoldersToCopy { get; }
+
 		void CopyOriginalUnityFiles() {
 			Log($"Copying files from {unityRepo.RepoPath} to {dnSpyVersionPath}");
 			unityRepo.ThrowIfTreeNotClean();
 			dnSpyRepo.ThrowIfTreeNotClean();
 			unityRepo.CheckOut(unityGitHash);
 			dnSpyRepo.CheckOut(Constants.DnSpyUnityRepo_master_Branch);
-			unityRepo.ThrowIfTreeNotClean();
 			dnSpyRepo.ThrowIfTreeNotClean();
+
+			var submodules = Submodules;
+			if (submodules.Length != 0) {
+				unityRepo.SubmoduleInit();
+				foreach (var relPath in submodules)
+					unityRepo.SubmoduleUpdate(relPath);
+			}
+			unityRepo.ThrowIfTreeNotClean();
+
 			FileUtils.CopyFilesFromTo(unityRepo.RepoPath, dnSpyVersionPath);
-			foreach (var dir in ConstantsV35.unityFoldersToCopy) {
-				var sourceDir = Path.Combine(unityRepo.RepoPath, dir);
-				var destinationDir = Path.Combine(dnSpyVersionPath, dir);
+			foreach (var dir in UnityFoldersToCopy) {
+				var sourceDir = PathCombine(unityRepo.RepoPath, dir);
+				var destinationDir = PathCombine(dnSpyVersionPath, dir);
 				FileUtils.CopyDirectoryFromTo(sourceDir, destinationDir);
 			}
 
@@ -70,6 +80,13 @@ namespace UnityMonoDllSourceCodePatcher.V35 {
 
 			Log($"Committing copied files");
 			dnSpyRepo.CommitAllFiles($"Add Unity files ({Path.GetFileName(dnSpyVersionPath)}), commit hash {unityGitHash}");
+		}
+
+		static string PathCombine(string path1, string path2) {
+			var list = new List<string>();
+			list.AddRange(path1.Split('/'));
+			list.AddRange(path2.Split('/'));
+			return Path.Combine(list.ToArray());
 		}
 
 		void UpdateReadMe() {
@@ -94,15 +111,12 @@ namespace UnityMonoDllSourceCodePatcher.V35 {
 			dnSpyRepo.CheckOut(Constants.DnSpyUnityRepo_dnSpy_Branch);
 			dnSpyRepo.ThrowIfTreeNotClean();
 
-			new SolutionPatcher(solutionOptions).Patch();
-			new EglibProjectPatcher(solutionOptions).Patch();
-			new GenmdescProjectPatcher(solutionOptions).Patch();
-			new LibgcProjectPatcher(solutionOptions).Patch();
-			new LibmonoProjectPatcher(solutionOptions).Patch();
-			new SourceCodePatcher(solutionOptions).Patch();
+			PatchOriginalFilesCore();
 
 			Log($"Committing patched files");
 			dnSpyRepo.CommitAllFiles($"Patch Unity files ({Path.GetFileName(dnSpyVersionPath)})");
 		}
+
+		protected abstract void PatchOriginalFilesCore();
 	}
 }

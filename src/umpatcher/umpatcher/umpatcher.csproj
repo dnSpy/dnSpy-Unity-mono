@@ -47,10 +47,15 @@
     <Compile Include="GitRepo.cs" />
     <Compile Include="GitUtils.cs" />
     <Compile Include="LineReader.cs" />
+    <Compile Include="Patcher.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="ProgramOptions.cs" />
+    <Compile Include="ProjectInfo.cs" />
+    <Compile Include="ProjectPatcher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReadMePatcher.cs" />
+    <Compile Include="SolutionOptions.cs" />
+    <Compile Include="SolutionPatcher.cs" />
     <Compile Include="TextFilePatcher.cs" />
     <Compile Include="TextLine.cs" />
     <Compile Include="UnityVersion.cs" />
@@ -59,12 +64,24 @@
     <Compile Include="V35\GenmdescProjectPatcher.cs" />
     <Compile Include="V35\LibgcProjectPatcher.cs" />
     <Compile Include="V35\LibmonoProjectPatcher.cs" />
-    <Compile Include="V35\Patcher.cs" />
-    <Compile Include="V35\ProjectInfo.cs" />
-    <Compile Include="V35\ProjectPatcher.cs" />
-    <Compile Include="V35\SolutionOptions.cs" />
-    <Compile Include="V35\SolutionPatcher.cs" />
+    <Compile Include="V35\PatcherV35.cs" />
+    <Compile Include="V35\ProjectPatcherV35.cs" />
+    <Compile Include="V35\SolutionOptionsV35.cs" />
     <Compile Include="V35\SourceCodePatcher.cs" />
+    <Compile Include="V40\BuildInitProjectPatcher.cs" />
+    <Compile Include="V40\ConstantsV40.cs" />
+    <Compile Include="V40\EglibProjectPatcher.cs" />
+    <Compile Include="V40\GenmdescProjectPatcher.cs" />
+    <Compile Include="V40\LibgcbdwgcProjectPatcher.cs" />
+    <Compile Include="V40\LibmonoDynamicProjectPatcher.cs" />
+    <Compile Include="V40\LibmonoProjectPatcher.cs" />
+    <Compile Include="V40\LibmonoruntimeProjectPatcher.cs" />
+    <Compile Include="V40\LibmonoStaticProjectPatcher.cs" />
+    <Compile Include="V40\LibmonoutilsProjectPatcher.cs" />
+    <Compile Include="V40\PatcherV40.cs" />
+    <Compile Include="V40\ProjectPatcherV40.cs" />
+    <Compile Include="V40\SolutionOptionsV40.cs" />
+    <Compile Include="V40\SourceCodePatcher.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

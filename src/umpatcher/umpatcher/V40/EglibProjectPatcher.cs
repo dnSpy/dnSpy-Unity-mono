@@ -17,10 +17,10 @@
     along with umpatcher.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-namespace UnityMonoDllSourceCodePatcher.V35 {
-	sealed class LibgcProjectPatcher : ProjectPatcherV35 {
-		public LibgcProjectPatcher(SolutionOptionsV35 solutionOptions)
-			: base(solutionOptions, solutionOptions?.LibgcProject) {
+namespace UnityMonoDllSourceCodePatcher.V40 {
+	sealed class EglibProjectPatcher : ProjectPatcherV40 {
+		public EglibProjectPatcher(SolutionOptionsV40 solutionOptions)
+			: base(solutionOptions, solutionOptions?.EglibProject) {
 		}
 
 		protected override void PatchCore() { }

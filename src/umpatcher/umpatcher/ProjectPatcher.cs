@@ -20,17 +20,22 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 
-namespace UnityMonoDllSourceCodePatcher.V35 {
+namespace UnityMonoDllSourceCodePatcher {
 	abstract class ProjectPatcher {
 		protected readonly SolutionOptions solutionOptions;
 		protected readonly ProjectInfo project;
+		readonly string oldProjectToolsVersion;
+		readonly string newProjectToolsVersion;
 		protected readonly TextFilePatcher textFilePatcher;
 
-		protected ProjectPatcher(SolutionOptions solutionOptions, ProjectInfo project) {
+		protected ProjectPatcher(SolutionOptions solutionOptions, ProjectInfo project, string oldProjectToolsVersion, string newProjectToolsVersion) {
 			this.solutionOptions = solutionOptions ?? throw new ArgumentNullException(nameof(solutionOptions));
 			this.project = project ?? throw new ArgumentNullException(nameof(project));
+			this.oldProjectToolsVersion = oldProjectToolsVersion ?? throw new ArgumentNullException(nameof(oldProjectToolsVersion));
+			this.newProjectToolsVersion = newProjectToolsVersion ?? throw new ArgumentNullException(nameof(newProjectToolsVersion));
 			Debug.Assert(solutionOptions.AllProjects.Any(a => a == project));
 			textFilePatcher = new TextFilePatcher(project.Filename);
 		}
@@ -59,7 +64,7 @@ namespace UnityMonoDllSourceCodePatcher.V35 {
 			var line = lines[index];
 			if (line.IsRemoved || !line.Text.Contains("<Project"))
 				return false;
-			var newString = line.Text.Replace(ConstantsV35.OldProjectToolsVersion, ConstantsV35.NewProjectToolsVersion);
+			var newString = line.Text.Replace(oldProjectToolsVersion, newProjectToolsVersion);
 			if (newString == line.Text)
 				return false;
 			lines[index] = line.Replace(newString);
@@ -81,6 +86,7 @@ namespace UnityMonoDllSourceCodePatcher.V35 {
 			return line.Replace(text);
 		}
 
+		IEnumerable<(int startTagIndex, int endTagIndex)> GetProjectReferences() => GetTags("ProjectReference");
 		IEnumerable<(int startTagIndex, int endTagIndex)> GetPropertyGroups() => GetTags("PropertyGroup");
 		protected IEnumerable<(int startTagIndex, int endTagIndex)> GetTags(string tagName) =>
 			GetTags(tagName, 0, textFilePatcher.Lines.Count);
@@ -145,18 +151,18 @@ namespace UnityMonoDllSourceCodePatcher.V35 {
 			var info = GetPropertyGroups().FirstOrDefault(a => textFilePatcher.Lines[a.startTagIndex].Text.Contains("Label=\"Globals\""));
 			if (info.startTagIndex == 0 && info.endTagIndex == 0)
 				throw new ProgramException($"Couldn't find Globals PropertyGroup, file '{textFilePatcher.Filename}'");
-			AddTag(info.endTagIndex, info.endTagIndex - 1, "WindowsTargetPlatformVersion", solutionOptions.WindowsTargetPlatformVersion);
+			UpdateOrCreateTag(info.startTagIndex + 1, info.endTagIndex, "WindowsTargetPlatformVersion", solutionOptions.WindowsTargetPlatformVersion);
 		}
 
 		void AddPlatformToolset() {
 			var infos = GetPropertyGroups().Where(a => textFilePatcher.Lines[a.startTagIndex].Text.Contains("Label=\"Configuration\""));
-			foreach (var info in infos)
-				AddTag(info.endTagIndex, info.endTagIndex - 1, "PlatformToolset", solutionOptions.PlatformToolset);
-		}
-
-		void AddTag(int index, int indentIndex, string tagName, string textValue) {
-			var indentation = textFilePatcher.GetLeadingWhitespace(indentIndex);
-			textFilePatcher.Insert(index, indentation + "<" + tagName + ">" + textValue + "</" + tagName + ">");
+			bool updated = false;
+			foreach (var info in infos) {
+				UpdateOrCreateTag(info.startTagIndex + 1, info.endTagIndex, "PlatformToolset", solutionOptions.PlatformToolset);
+				updated = true;
+			}
+			if (!updated)
+				throw new ProgramException($"Couldn't find Configuration PropertyGroup, file '{textFilePatcher.Filename}'");
 		}
 
 		protected void UpdateTreatWarningAsError(string newValue) {
@@ -169,13 +175,54 @@ namespace UnityMonoDllSourceCodePatcher.V35 {
 			});
 		}
 
-		protected void PatchPreprocessorDefinitions() =>
-			textFilePatcher.Replace(line => {
-				if (!line.Text.Contains("<PreprocessorDefinitions>"))
-					return line;
-				return line.Replace(line.Text.Replace(ConstantsV35.OldWinVer, ConstantsV35.NewWinVer));
-			});
+		protected void RemoveProjectReference(string projectFilename) {
+			var info = GetProjectReferences().FirstOrDefault(a => textFilePatcher.Lines[a.startTagIndex].Text.Contains($"Include=\"{projectFilename}\""));
+			if (info.startTagIndex == 0 && info.endTagIndex == 0)
+				throw new ProgramException($"Couldn't find {projectFilename} ProjectReference, file '{textFilePatcher.Filename}'");
+			textFilePatcher.Lines.RemoveRange(info.startTagIndex, info.endTagIndex - info.startTagIndex + 1);
+		}
 
-		protected void RemoveBrowseInformationTags() => textFilePatcher.RemoveLines(line => line.Text.Contains("<BrowseInformation"));
+		protected void AddProjectReference(ProjectInfo project) {
+			var info = GetProjectReferences().LastOrDefault();
+			if (info.startTagIndex == 0 && info.endTagIndex == 0)
+				throw new ProgramException($"Couldn't find any ProjectReference, file '{textFilePatcher.Filename}'");
+			if (info.endTagIndex - info.startTagIndex < 2)
+				throw new ProgramException("Expected at least 3 lines");
+			int index = info.endTagIndex + 1;
+			textFilePatcher.Insert(index++, textFilePatcher.Lines[info.startTagIndex].GetLeadingWhitespace() + $"<ProjectReference Include=\"{Path.GetFileName(project.Filename)}\">");
+			textFilePatcher.Insert(index++, textFilePatcher.Lines[info.startTagIndex + 1].GetLeadingWhitespace() + $"<Project>{{{project.NewGuidLowerString}}}</Project>");
+			textFilePatcher.Insert(index++, textFilePatcher.Lines[info.endTagIndex].Text);
+		}
+
+		protected void PatchOutDirs() {
+			var newVersion = new UnityVersion(solutionOptions.UnityVersion.Major, solutionOptions.UnityVersion.Minor, solutionOptions.UnityVersion.Build, string.Empty);
+			var name = Constants.UnityVersionPrefix + newVersion.ToString();
+			var newValue = @"..\..\builds\$(Configuration)\" + name + @"\win$(PlatformArchitecture)\";
+			textFilePatcher.Replace(line => {
+				if (!line.Text.Contains("<OutDir"))
+					return line;
+				const string PATTERN = "\">";
+				int index = line.Text.IndexOf(PATTERN);
+				if (!line.Text.Contains("<OutDir Condition") || !line.Text.EndsWith("</OutDir>") || index < 0)
+					throw new ProgramException("Unexpected tag content");
+				var first = line.Text.Substring(0, index + PATTERN.Length);
+				var newText = first + newValue + "</OutDir>";
+				return line.Replace(newText);
+			});
+		}
+
+		protected void PatchDebugInformationFormats(string[] releaseConfigsWithNoPdb) {
+			foreach (var itemDefInfo in GetItemDefinitionGroups(releaseConfigsWithNoPdb)) {
+				foreach (var info in GetTags("ClCompile", itemDefInfo.startTagIndex + 1, itemDefInfo.endTagIndex))
+					UpdateOrCreateTag(info.startTagIndex + 1, info.endTagIndex, "DebugInformationFormat", "None");
+			}
+		}
+
+		protected void PatchGenerateDebugInformationTags(string[] releaseConfigsWithNoPdb) {
+			foreach (var itemDefInfo in GetItemDefinitionGroups(releaseConfigsWithNoPdb)) {
+				foreach (var info in GetTags("Link", itemDefInfo.startTagIndex + 1, itemDefInfo.endTagIndex))
+					UpdateOrCreateTag(info.startTagIndex + 1, info.endTagIndex, "GenerateDebugInformation", "false");
+			}
+		}
 	}
 }
