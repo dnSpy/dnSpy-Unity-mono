@@ -7331,9 +7331,13 @@ ves_icall_get_resources_ptr (MonoReflectionAssembly *assembly, gpointer *result,
 	return TRUE;
 }
 
+extern gboolean dnSpy_hideDebugger;
+
 ICALL_EXPORT MonoBoolean
 ves_icall_System_Diagnostics_Debugger_IsAttached_internal (void)
 {
+	if (dnSpy_hideDebugger)
+		return 0;
 	return mono_is_debugger_attached ();
 }
 
