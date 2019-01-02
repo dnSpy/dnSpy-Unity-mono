@@ -3812,6 +3812,8 @@ mini_init (const char *filename, const char *runtime_version)
 
 	CHECKED_MONO_INIT ();
 
+	dnSpy_debugger_init ();
+
 #if defined(__linux__)
 	if (access ("/proc/self/maps", F_OK) != 0) {
 		g_print ("Mono requires /proc to be mounted.\n");
