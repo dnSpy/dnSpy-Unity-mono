@@ -1,90 +1,22 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{6C1FA2F7-C2B0-4FB2-A389-E8EEBB6B6E4D}</ProjectGuid>
     <OutputType>Exe</OutputType>
+    <TargetFrameworks>net472;netcoreapp2.0</TargetFrameworks>
     <RootNamespace>UnityMonoDllSourceCodePatcher</RootNamespace>
-    <AssemblyName>umpatcher</AssemblyName>
-    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Copyright>Copyright (C) 2018-2019 de4dot@gmail.com</Copyright>
+    <Version>1.0.0</Version>
+    <Authors>0xd4d</Authors>
+    <InformationalVersion>$(Version)</InformationalVersion>
+    <LangVersion>latest</LangVersion>
+    <Features>strict</Features>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>portable</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <LangVersion>latest</LangVersion>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>portable</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <LangVersion>latest</LangVersion>
-    <Prefer32Bit>false</Prefer32Bit>
-    <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="System" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="CommandLineParser.cs" />
-    <Compile Include="Constants.cs" />
-    <Compile Include="Exec.cs" />
-    <Compile Include="FileUtils.cs" />
-    <Compile Include="GitRepo.cs" />
-    <Compile Include="GitUtils.cs" />
-    <Compile Include="LineReader.cs" />
-    <Compile Include="Patcher.cs" />
-    <Compile Include="Program.cs" />
-    <Compile Include="ProgramOptions.cs" />
-    <Compile Include="ProjectInfo.cs" />
-    <Compile Include="ProjectPatcher.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ReadMePatcher.cs" />
-    <Compile Include="SolutionOptions.cs" />
-    <Compile Include="SolutionPatcher.cs" />
-    <Compile Include="TextFilePatcher.cs" />
-    <Compile Include="TextLine.cs" />
-    <Compile Include="UnityVersion.cs" />
-    <Compile Include="V35\ConstantsV35.cs" />
-    <Compile Include="V35\EglibProjectPatcher.cs" />
-    <Compile Include="V35\GenmdescProjectPatcher.cs" />
-    <Compile Include="V35\LibgcProjectPatcher.cs" />
-    <Compile Include="V35\LibmonoProjectPatcher.cs" />
-    <Compile Include="V35\PatcherV35.cs" />
-    <Compile Include="V35\ProjectPatcherV35.cs" />
-    <Compile Include="V35\SolutionOptionsV35.cs" />
-    <Compile Include="V35\SourceCodePatcher.cs" />
-    <Compile Include="V40\BuildInitProjectPatcher.cs" />
-    <Compile Include="V40\ConstantsV40.cs" />
-    <Compile Include="V40\EglibProjectPatcher.cs" />
-    <Compile Include="V40\GenmdescProjectPatcher.cs" />
-    <Compile Include="V40\LibgcbdwgcProjectPatcher.cs" />
-    <Compile Include="V40\LibmonoDynamicProjectPatcher.cs" />
-    <Compile Include="V40\LibmonoProjectPatcher.cs" />
-    <Compile Include="V40\LibmonoruntimeProjectPatcher.cs" />
-    <Compile Include="V40\LibmonoStaticProjectPatcher.cs" />
-    <Compile Include="V40\LibmonoutilsProjectPatcher.cs" />
-    <Compile Include="V40\PatcherV40.cs" />
-    <Compile Include="V40\ProjectPatcherV40.cs" />
-    <Compile Include="V40\SolutionOptionsV40.cs" />
-    <Compile Include="V40\SourceCodePatcher.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+
 </Project>
