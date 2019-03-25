@@ -285,4 +285,5 @@ version | git hash
 2018.3.7 | 06ee73c25fda8dc2eecfbfbe7076cee4c7b9c442
 2018.3.7-mbe | d38c41f8a41c0b3bbf13a862a632ef2b3af9cc36
 2018.3.8 | 06ee73c25fda8dc2eecfbfbe7076cee4c7b9c442
+2018.3.8-mbe | 92dc0eca4ba6e9889c265fb5fea2b722563947d8
 2018.3.9 | 06ee73c25fda8dc2eecfbfbe7076cee4c7b9c442
