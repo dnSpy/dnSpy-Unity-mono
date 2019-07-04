@@ -24,6 +24,7 @@
 
 #ifndef GCCONFIG_H
 #define GCCONFIG_H
+#define GC_DISABLE_INCREMENTAL
 
 #define MANUAL_VDB
 
