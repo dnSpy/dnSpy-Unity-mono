@@ -36,6 +36,7 @@ namespace UnityMonoDllSourceCodePatcher.V40 {
 			Add_mono_mini_dnSpy_c();
 			Patch_masm_fixed_props();
 			Patch_bdwgc_gc_atomic_ops_h();
+			Patch_bdwgc_gcconfig_h();
 		}
 
 		void Patch_mono_metadata_icall_c() {
@@ -153,6 +154,16 @@ namespace UnityMonoDllSourceCodePatcher.V40 {
 				text = text.Replace("#elif !defined(NN_PLATFORM_CTR)", "#elif false");
 				return line.Replace(text);
 			});
+			textFilePatcher.Write();
+		}
+
+		void Patch_bdwgc_gcconfig_h() {
+			if (solutionOptions.UnityVersion.CompareTo(new UnityVersion(2019, 1, 0, "-mbe")) < 0)
+				return;
+			var filename = Path.Combine(solutionOptions.UnityVersionDir, "external", "bdwgc", "include", "private", "gcconfig.h");
+			var textFilePatcher = new TextFilePatcher(filename);
+			int index = textFilePatcher.GetIndexOfLine("#define GCCONFIG_H");
+			textFilePatcher.Insert(index + 1, "#define GC_DISABLE_INCREMENTAL");
 			textFilePatcher.Write();
 		}
 	}
