@@ -1658,6 +1658,16 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libgc", "unity-2018.3.11\ms
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libmono", "unity-2018.3.11\msvc\libmono.vcxproj", "{84595CC6-7E22-4E28-B09B-2B79CB037F5F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "unity-2017.4.25", "unity-2017.4.25", "{5A9C2F07-18AA-4A21-9A89-54FF9D2C8AE0}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "eglib", "unity-2017.4.25\msvc\eglib.vcxproj", "{979A7244-9F88-4DE0-B59E-1DF93C54EB7B}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "genmdesc", "unity-2017.4.25\msvc\genmdesc.vcxproj", "{A81D8AA1-8820-451E-BF02-30581A23E333}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libgc", "unity-2017.4.25\msvc\libgc.vcxproj", "{946638F4-202D-4FE2-96F6-1CCFC311D07D}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libmono", "unity-2017.4.25\msvc\libmono.vcxproj", "{21AFD393-CE90-4C66-A531-2A959306A4B5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug_eglib|x64 = Debug_eglib|x64
@@ -14872,6 +14882,86 @@ Global
 		{84595CC6-7E22-4E28-B09B-2B79CB037F5F}.Release|x64.Build.0 = Release|x64
 		{84595CC6-7E22-4E28-B09B-2B79CB037F5F}.Release|x86.ActiveCfg = Release|Win32
 		{84595CC6-7E22-4E28-B09B-2B79CB037F5F}.Release|x86.Build.0 = Release|Win32
+		{979A7244-9F88-4DE0-B59E-1DF93C54EB7B}.Debug_eglib|x64.ActiveCfg = Debug_eglib|x64
+		{979A7244-9F88-4DE0-B59E-1DF93C54EB7B}.Debug_eglib|x64.Build.0 = Debug_eglib|x64
+		{979A7244-9F88-4DE0-B59E-1DF93C54EB7B}.Debug_eglib|x86.ActiveCfg = Debug_eglib|Win32
+		{979A7244-9F88-4DE0-B59E-1DF93C54EB7B}.Debug_eglib|x86.Build.0 = Debug_eglib|Win32
+		{979A7244-9F88-4DE0-B59E-1DF93C54EB7B}.Debug|x64.ActiveCfg = Debug|x64
+		{979A7244-9F88-4DE0-B59E-1DF93C54EB7B}.Debug|x64.Build.0 = Debug|x64
+		{979A7244-9F88-4DE0-B59E-1DF93C54EB7B}.Debug|x86.ActiveCfg = Debug|Win32
+		{979A7244-9F88-4DE0-B59E-1DF93C54EB7B}.Debug|x86.Build.0 = Debug|Win32
+		{979A7244-9F88-4DE0-B59E-1DF93C54EB7B}.Release_eglib_xarm|x64.ActiveCfg = Release_eglib_xarm|x64
+		{979A7244-9F88-4DE0-B59E-1DF93C54EB7B}.Release_eglib_xarm|x64.Build.0 = Release_eglib_xarm|x64
+		{979A7244-9F88-4DE0-B59E-1DF93C54EB7B}.Release_eglib_xarm|x86.ActiveCfg = Release_eglib_xarm|Win32
+		{979A7244-9F88-4DE0-B59E-1DF93C54EB7B}.Release_eglib_xarm|x86.Build.0 = Release_eglib_xarm|Win32
+		{979A7244-9F88-4DE0-B59E-1DF93C54EB7B}.Release_eglib|x64.ActiveCfg = Release_eglib|x64
+		{979A7244-9F88-4DE0-B59E-1DF93C54EB7B}.Release_eglib|x64.Build.0 = Release_eglib|x64
+		{979A7244-9F88-4DE0-B59E-1DF93C54EB7B}.Release_eglib|x86.ActiveCfg = Release_eglib|Win32
+		{979A7244-9F88-4DE0-B59E-1DF93C54EB7B}.Release_eglib|x86.Build.0 = Release_eglib|Win32
+		{979A7244-9F88-4DE0-B59E-1DF93C54EB7B}.Release|x64.ActiveCfg = Release|x64
+		{979A7244-9F88-4DE0-B59E-1DF93C54EB7B}.Release|x64.Build.0 = Release|x64
+		{979A7244-9F88-4DE0-B59E-1DF93C54EB7B}.Release|x86.ActiveCfg = Release|Win32
+		{979A7244-9F88-4DE0-B59E-1DF93C54EB7B}.Release|x86.Build.0 = Release|Win32
+		{A81D8AA1-8820-451E-BF02-30581A23E333}.Debug_eglib|x64.ActiveCfg = Debug_eglib|x64
+		{A81D8AA1-8820-451E-BF02-30581A23E333}.Debug_eglib|x64.Build.0 = Debug_eglib|x64
+		{A81D8AA1-8820-451E-BF02-30581A23E333}.Debug_eglib|x86.ActiveCfg = Debug_eglib|Win32
+		{A81D8AA1-8820-451E-BF02-30581A23E333}.Debug_eglib|x86.Build.0 = Debug_eglib|Win32
+		{A81D8AA1-8820-451E-BF02-30581A23E333}.Debug|x64.ActiveCfg = Debug|x64
+		{A81D8AA1-8820-451E-BF02-30581A23E333}.Debug|x64.Build.0 = Debug|x64
+		{A81D8AA1-8820-451E-BF02-30581A23E333}.Debug|x86.ActiveCfg = Debug|Win32
+		{A81D8AA1-8820-451E-BF02-30581A23E333}.Debug|x86.Build.0 = Debug|Win32
+		{A81D8AA1-8820-451E-BF02-30581A23E333}.Release_eglib_xarm|x64.ActiveCfg = Release_eglib_xarm|x64
+		{A81D8AA1-8820-451E-BF02-30581A23E333}.Release_eglib_xarm|x64.Build.0 = Release_eglib_xarm|x64
+		{A81D8AA1-8820-451E-BF02-30581A23E333}.Release_eglib_xarm|x86.ActiveCfg = Release_eglib_xarm|Win32
+		{A81D8AA1-8820-451E-BF02-30581A23E333}.Release_eglib_xarm|x86.Build.0 = Release_eglib_xarm|Win32
+		{A81D8AA1-8820-451E-BF02-30581A23E333}.Release_eglib|x64.ActiveCfg = Release_eglib|x64
+		{A81D8AA1-8820-451E-BF02-30581A23E333}.Release_eglib|x64.Build.0 = Release_eglib|x64
+		{A81D8AA1-8820-451E-BF02-30581A23E333}.Release_eglib|x86.ActiveCfg = Release_eglib|Win32
+		{A81D8AA1-8820-451E-BF02-30581A23E333}.Release_eglib|x86.Build.0 = Release_eglib|Win32
+		{A81D8AA1-8820-451E-BF02-30581A23E333}.Release|x64.ActiveCfg = Release|x64
+		{A81D8AA1-8820-451E-BF02-30581A23E333}.Release|x64.Build.0 = Release|x64
+		{A81D8AA1-8820-451E-BF02-30581A23E333}.Release|x86.ActiveCfg = Release|Win32
+		{A81D8AA1-8820-451E-BF02-30581A23E333}.Release|x86.Build.0 = Release|Win32
+		{946638F4-202D-4FE2-96F6-1CCFC311D07D}.Debug_eglib|x64.ActiveCfg = Debug_eglib|x64
+		{946638F4-202D-4FE2-96F6-1CCFC311D07D}.Debug_eglib|x64.Build.0 = Debug_eglib|x64
+		{946638F4-202D-4FE2-96F6-1CCFC311D07D}.Debug_eglib|x86.ActiveCfg = Debug_eglib|Win32
+		{946638F4-202D-4FE2-96F6-1CCFC311D07D}.Debug_eglib|x86.Build.0 = Debug_eglib|Win32
+		{946638F4-202D-4FE2-96F6-1CCFC311D07D}.Debug|x64.ActiveCfg = Debug|x64
+		{946638F4-202D-4FE2-96F6-1CCFC311D07D}.Debug|x64.Build.0 = Debug|x64
+		{946638F4-202D-4FE2-96F6-1CCFC311D07D}.Debug|x86.ActiveCfg = Debug|Win32
+		{946638F4-202D-4FE2-96F6-1CCFC311D07D}.Debug|x86.Build.0 = Debug|Win32
+		{946638F4-202D-4FE2-96F6-1CCFC311D07D}.Release_eglib_xarm|x64.ActiveCfg = Release_eglib_xarm|x64
+		{946638F4-202D-4FE2-96F6-1CCFC311D07D}.Release_eglib_xarm|x64.Build.0 = Release_eglib_xarm|x64
+		{946638F4-202D-4FE2-96F6-1CCFC311D07D}.Release_eglib_xarm|x86.ActiveCfg = Release_eglib_xarm|Win32
+		{946638F4-202D-4FE2-96F6-1CCFC311D07D}.Release_eglib_xarm|x86.Build.0 = Release_eglib_xarm|Win32
+		{946638F4-202D-4FE2-96F6-1CCFC311D07D}.Release_eglib|x64.ActiveCfg = Release_eglib|x64
+		{946638F4-202D-4FE2-96F6-1CCFC311D07D}.Release_eglib|x64.Build.0 = Release_eglib|x64
+		{946638F4-202D-4FE2-96F6-1CCFC311D07D}.Release_eglib|x86.ActiveCfg = Release_eglib|Win32
+		{946638F4-202D-4FE2-96F6-1CCFC311D07D}.Release_eglib|x86.Build.0 = Release_eglib|Win32
+		{946638F4-202D-4FE2-96F6-1CCFC311D07D}.Release|x64.ActiveCfg = Release|x64
+		{946638F4-202D-4FE2-96F6-1CCFC311D07D}.Release|x64.Build.0 = Release|x64
+		{946638F4-202D-4FE2-96F6-1CCFC311D07D}.Release|x86.ActiveCfg = Release|Win32
+		{946638F4-202D-4FE2-96F6-1CCFC311D07D}.Release|x86.Build.0 = Release|Win32
+		{21AFD393-CE90-4C66-A531-2A959306A4B5}.Debug_eglib|x64.ActiveCfg = Debug_eglib|x64
+		{21AFD393-CE90-4C66-A531-2A959306A4B5}.Debug_eglib|x64.Build.0 = Debug_eglib|x64
+		{21AFD393-CE90-4C66-A531-2A959306A4B5}.Debug_eglib|x86.ActiveCfg = Debug_eglib|Win32
+		{21AFD393-CE90-4C66-A531-2A959306A4B5}.Debug_eglib|x86.Build.0 = Debug_eglib|Win32
+		{21AFD393-CE90-4C66-A531-2A959306A4B5}.Debug|x64.ActiveCfg = Debug|x64
+		{21AFD393-CE90-4C66-A531-2A959306A4B5}.Debug|x64.Build.0 = Debug|x64
+		{21AFD393-CE90-4C66-A531-2A959306A4B5}.Debug|x86.ActiveCfg = Debug|Win32
+		{21AFD393-CE90-4C66-A531-2A959306A4B5}.Debug|x86.Build.0 = Debug|Win32
+		{21AFD393-CE90-4C66-A531-2A959306A4B5}.Release_eglib_xarm|x64.ActiveCfg = Release_eglib_xarm|x64
+		{21AFD393-CE90-4C66-A531-2A959306A4B5}.Release_eglib_xarm|x64.Build.0 = Release_eglib_xarm|x64
+		{21AFD393-CE90-4C66-A531-2A959306A4B5}.Release_eglib_xarm|x86.ActiveCfg = Release_eglib_xarm|Win32
+		{21AFD393-CE90-4C66-A531-2A959306A4B5}.Release_eglib_xarm|x86.Build.0 = Release_eglib_xarm|Win32
+		{21AFD393-CE90-4C66-A531-2A959306A4B5}.Release_eglib|x64.ActiveCfg = Release_eglib|x64
+		{21AFD393-CE90-4C66-A531-2A959306A4B5}.Release_eglib|x64.Build.0 = Release_eglib|x64
+		{21AFD393-CE90-4C66-A531-2A959306A4B5}.Release_eglib|x86.ActiveCfg = Release_eglib|Win32
+		{21AFD393-CE90-4C66-A531-2A959306A4B5}.Release_eglib|x86.Build.0 = Release_eglib|Win32
+		{21AFD393-CE90-4C66-A531-2A959306A4B5}.Release|x64.ActiveCfg = Release|x64
+		{21AFD393-CE90-4C66-A531-2A959306A4B5}.Release|x64.Build.0 = Release|x64
+		{21AFD393-CE90-4C66-A531-2A959306A4B5}.Release|x86.ActiveCfg = Release|Win32
+		{21AFD393-CE90-4C66-A531-2A959306A4B5}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -15537,6 +15627,10 @@ Global
 		{58B99A8C-A022-4A8D-A201-231D5D47C570} = {A75FC847-5326-467F-93CC-38463064CC66}
 		{E3FDC02A-E710-4C77-A9EA-7A8C8C58DA86} = {A75FC847-5326-467F-93CC-38463064CC66}
 		{84595CC6-7E22-4E28-B09B-2B79CB037F5F} = {A75FC847-5326-467F-93CC-38463064CC66}
+		{979A7244-9F88-4DE0-B59E-1DF93C54EB7B} = {5A9C2F07-18AA-4A21-9A89-54FF9D2C8AE0}
+		{A81D8AA1-8820-451E-BF02-30581A23E333} = {5A9C2F07-18AA-4A21-9A89-54FF9D2C8AE0}
+		{946638F4-202D-4FE2-96F6-1CCFC311D07D} = {5A9C2F07-18AA-4A21-9A89-54FF9D2C8AE0}
+		{21AFD393-CE90-4C66-A531-2A959306A4B5} = {5A9C2F07-18AA-4A21-9A89-54FF9D2C8AE0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {22843117-1412-4A93-878D-A66FC9DAC383}
