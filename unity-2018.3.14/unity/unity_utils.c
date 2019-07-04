@@ -43,7 +43,7 @@ void unity_mono_redirect_output( HANDLE handle )
 //	int fd_copy;
 	unity_log_output = handle;	
 	fd = _open_osfhandle((intptr_t)handle, (_O_APPEND | _O_TEXT));
-	stdout->_file = fd;
+	//stdout->_file = fd;
 	_dup2(fd,_fileno(stdout));
 	//*stdout = *_fdopen(fd, "at");
 	
