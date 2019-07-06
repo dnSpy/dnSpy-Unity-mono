@@ -9,7 +9,9 @@
     <Authors>0xd4d</Authors>
     <InformationalVersion>$(Version)</InformationalVersion>
     <LangVersion>latest</LangVersion>
-    <Features>strict</Features>
+    <Features>strict;nullablePublicOnly</Features>
+    <LangVersion>8.0</LangVersion>
+    <NullableContextOptions>enable</NullableContextOptions>
   </PropertyGroup>
 
   <ItemGroup>

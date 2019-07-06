@@ -19,7 +19,7 @@
 
 namespace UnityMonoDllSourceCodePatcher.V35 {
 	sealed class EglibProjectPatcher : ProjectPatcherV35 {
-		public EglibProjectPatcher(SolutionOptionsV35 solutionOptions)
+		public EglibProjectPatcher(SolutionOptionsV35? solutionOptions)
 			: base(solutionOptions, solutionOptions?.EglibProject) {
 		}
 

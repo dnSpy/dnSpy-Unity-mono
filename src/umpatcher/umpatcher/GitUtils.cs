@@ -19,6 +19,7 @@
 
 using System;
 using System.IO;
+using System.Runtime.CompilerServices;
 
 namespace UnityMonoDllSourceCodePatcher {
 	static class GitUtils {
@@ -27,7 +28,7 @@ namespace UnityMonoDllSourceCodePatcher {
 		const string GIT_PROGRAMFILES_BIN_NAME = "bin";
 		const string GIT_EXE = "git.exe";
 
-		public static string FindGit() {
+		public static string? FindGit() {
 			if (TryFindGitFromPathEnvVar(out var gitPath))
 				return gitPath;
 			if (TryFindFromPath(Environment.SpecialFolder.ProgramFiles, out gitPath))
@@ -38,7 +39,7 @@ namespace UnityMonoDllSourceCodePatcher {
 			return null;
 		}
 
-		static bool TryFindGitFromPathEnvVar(out string gitPath) {
+		static bool TryFindGitFromPathEnvVar([NotNullWhenTrue] out string? gitPath) {
 			gitPath = null;
 			var pathEnvVar = Environment.GetEnvironmentVariable(PATH_ENV_VAR);
 			if (pathEnvVar == null)
@@ -51,7 +52,7 @@ namespace UnityMonoDllSourceCodePatcher {
 			return false;
 		}
 
-		static bool TryFindFromPath(Environment.SpecialFolder folder, out string gitPath) {
+		static bool TryFindFromPath(Environment.SpecialFolder folder, [NotNullWhenTrue] out string? gitPath) {
 			gitPath = null;
 			var path = Environment.GetFolderPath(folder);
 			if (!Directory.Exists(path))
@@ -60,7 +61,7 @@ namespace UnityMonoDllSourceCodePatcher {
 			return TryFindFromPath(path, out gitPath);
 		}
 
-		static bool TryFindFromPath(string path, out string gitPath) {
+		static bool TryFindFromPath(string path, [NotNullWhenTrue] out string? gitPath) {
 			gitPath = null;
 			if (!Directory.Exists(path))
 				return false;

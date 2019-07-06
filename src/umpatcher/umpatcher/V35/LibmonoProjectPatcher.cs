@@ -20,7 +20,7 @@
 
 namespace UnityMonoDllSourceCodePatcher.V35 {
 	sealed class LibmonoProjectPatcher : ProjectPatcherV35 {
-		public LibmonoProjectPatcher(SolutionOptionsV35 solutionOptions)
+		public LibmonoProjectPatcher(SolutionOptionsV35? solutionOptions)
 			: base(solutionOptions, solutionOptions?.LibmonoProject) {
 		}
 

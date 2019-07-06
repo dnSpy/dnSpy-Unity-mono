@@ -28,15 +28,15 @@ namespace UnityMonoDllSourceCodePatcher.V40 {
 	}
 
 	sealed class SolutionOptionsV40 : SolutionOptions {
-		public readonly ProjectInfo BuildInitProject;
-		public readonly ProjectInfo EglibProject;
-		public readonly ProjectInfo GenmdescProject;
-		public readonly ProjectInfo LibgcbdwgcProject;
-		public readonly ProjectInfo LibmonoProject;
-		public readonly ProjectInfo LibmonoDynamicProject;
-		public readonly ProjectInfo LibmonoruntimeProject;
-		public readonly ProjectInfo LibmonoStaticProject;
-		public readonly ProjectInfo LibmonoutilsProject;
+		public readonly ProjectInfo? BuildInitProject;
+		public readonly ProjectInfo? EglibProject;
+		public readonly ProjectInfo? GenmdescProject;
+		public readonly ProjectInfo? LibgcbdwgcProject;
+		public readonly ProjectInfo? LibmonoProject;
+		public readonly ProjectInfo? LibmonoDynamicProject;
+		public readonly ProjectInfo? LibmonoruntimeProject;
+		public readonly ProjectInfo? LibmonoStaticProject;
+		public readonly ProjectInfo? LibmonoutilsProject;
 
 		public override IEnumerable<ProjectInfo> AllProjects {
 			get {

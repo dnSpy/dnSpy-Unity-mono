@@ -19,7 +19,7 @@
 
 namespace UnityMonoDllSourceCodePatcher.V35 {
 	abstract class ProjectPatcherV35 : ProjectPatcher {
-		protected ProjectPatcherV35(SolutionOptions solutionOptions, ProjectInfo project)
+		protected ProjectPatcherV35(SolutionOptions? solutionOptions, ProjectInfo? project)
 			: base(solutionOptions, project, ConstantsV35.OldProjectToolsVersion, ConstantsV35.NewProjectToolsVersion) {
 		}
 

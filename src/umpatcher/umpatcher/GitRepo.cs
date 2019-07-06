@@ -35,7 +35,7 @@ namespace UnityMonoDllSourceCodePatcher {
 			throw new ProgramException($"{message} (Repo: {repoPath})");
 
 		public void ThrowIfTreeNotClean() {
-			int result = Exec.Run(repoPath, gitPath, "status", out string standardOutput, out string standardError);
+			int result = Exec.Run(repoPath, gitPath, "status", out var standardOutput, out _);
 			if (result != 0)
 				ThrowError($"Git status failed with error code {result}");
 			if (!standardOutput.Contains(Constants.GitCleanTreeMessage))
