@@ -57,7 +57,7 @@ namespace UnityMonoDllSourceCodePatcher.V40 {
 		public override string[] SolutionBuildInfos => ConstantsV40.SolutionBuildInfos;
 
 		public SolutionOptionsV40(string solutionDir, string versionPath, string unityVersion, string windowsTargetPlatformVersion, string platformToolset, ProjectFilesKind projectFilesKind)
-			: base(solutionDir, versionPath, unityVersion, windowsTargetPlatformVersion, platformToolset, ConstantsV40.SolutionFilename) {
+			: base(solutionDir, versionPath, unityVersion, windowsTargetPlatformVersion, platformToolset, ConstantsV40.SolutionFilenameFormatString) {
 			var msvcPath = Path.Combine(versionPath, "msvc");
 			switch (projectFilesKind) {
 			case ProjectFilesKind.V2017:

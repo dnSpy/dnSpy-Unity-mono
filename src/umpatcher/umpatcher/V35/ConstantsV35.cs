@@ -29,7 +29,7 @@ namespace UnityMonoDllSourceCodePatcher.V35 {
 			"unity",
 		};
 
-		public const string SolutionFilename = "dnSpy-Unity-mono.sln";
+		public const string SolutionFilenameFormatString = "dnSpy-Unity-mono-{0}.x.sln";
 		public static readonly string[] SolutionConfigurations = new string[] {
 			"Debug_eglib",
 			"Debug",

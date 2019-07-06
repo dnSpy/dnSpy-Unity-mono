@@ -41,7 +41,7 @@ namespace UnityMonoDllSourceCodePatcher.V35 {
 		public override string[] SolutionBuildInfos => ConstantsV35.SolutionBuildInfos;
 
 		public SolutionOptionsV35(string solutionDir, string versionPath, string unityVersion, string windowsTargetPlatformVersion, string platformToolset)
-			: base(solutionDir, versionPath, unityVersion, windowsTargetPlatformVersion, platformToolset, ConstantsV35.SolutionFilename) {
+			: base(solutionDir, versionPath, unityVersion, windowsTargetPlatformVersion, platformToolset, ConstantsV35.SolutionFilenameFormatString) {
 			var msvcPath = Path.Combine(versionPath, "msvc");
 			EglibProject = new ProjectInfo(ConstantsV35.OldGuid_eglib, Path.Combine(msvcPath, "eglib.vcxproj"));
 			GenmdescProject = new ProjectInfo(ConstantsV35.OldGuid_genmdesc, Path.Combine(msvcPath, "genmdesc.vcxproj"));

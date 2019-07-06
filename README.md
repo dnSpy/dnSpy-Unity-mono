@@ -30,11 +30,11 @@ The `master` branch contains the original files. You have to check out the `dnSp
 
 # Building `mono.dll` & `mono-2.0-bdwgc.dll`
 
-- `dnSpy-Unity-mono.sln` (Unity with .NET 2.0-3.5 assemblies)
+- `dnSpy-Unity-mono-VVVV.x.sln` (Unity with .NET 2.0-3.5 assemblies), where `VVVV` is the major version number, eg. 4, 5, 2017, ...
 	- Use configuration `Release_eglib`
 	- Use platform `x86` or `x64`
 
-- `dnSpy-Unity-mono-V40.sln` (Unity with .NET 4.x assemblies)
+- `dnSpy-Unity-mono-VVVV.x-V40.sln` (Unity with .NET 4.x assemblies), where `VVVV` is the major version number, eg. 2017, 2018, ...
 	- Use configuration `Release`
 	- Use platform `x86` or `x64`
 
