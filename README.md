@@ -6,7 +6,7 @@ The `master` branch contains the original files. You have to check out the `dnSp
 
 - Pull in the latest Unity mono.dll source code (either `git pull` if you have it or `git clone https://github.com/Unity-Technologies/mono.git`)
 - Get this repo and make sure `master` and `dnSpy` branches are at the latest commit (`git pull` in both branches)
-- Compile `umpatcher` in this repo
+- Compile `umpatcher` in this repo (you need VS2019 or later and .NET Core SDK 3.0 or later installed)
 - Download and install the correct Unity editor version
 	- https://unity3d.com/get-unity/download/archive
 	- https://unity3d.com/unity/qa/lts-releases
