@@ -28,15 +28,15 @@ namespace UnityMonoDllSourceCodePatcher.V40 {
 	}
 
 	sealed class SolutionOptionsV40 : SolutionOptions {
-		public readonly ProjectInfo BuildInitProject;
-		public readonly ProjectInfo EglibProject;
-		public readonly ProjectInfo GenmdescProject;
-		public readonly ProjectInfo LibgcbdwgcProject;
-		public readonly ProjectInfo LibmonoProject;
-		public readonly ProjectInfo LibmonoDynamicProject;
-		public readonly ProjectInfo LibmonoruntimeProject;
-		public readonly ProjectInfo LibmonoStaticProject;
-		public readonly ProjectInfo LibmonoutilsProject;
+		public readonly ProjectInfo? BuildInitProject;
+		public readonly ProjectInfo? EglibProject;
+		public readonly ProjectInfo? GenmdescProject;
+		public readonly ProjectInfo? LibgcbdwgcProject;
+		public readonly ProjectInfo? LibmonoProject;
+		public readonly ProjectInfo? LibmonoDynamicProject;
+		public readonly ProjectInfo? LibmonoruntimeProject;
+		public readonly ProjectInfo? LibmonoStaticProject;
+		public readonly ProjectInfo? LibmonoutilsProject;
 
 		public override IEnumerable<ProjectInfo> AllProjects {
 			get {
@@ -57,7 +57,7 @@ namespace UnityMonoDllSourceCodePatcher.V40 {
 		public override string[] SolutionBuildInfos => ConstantsV40.SolutionBuildInfos;
 
 		public SolutionOptionsV40(string solutionDir, string versionPath, string unityVersion, string windowsTargetPlatformVersion, string platformToolset, ProjectFilesKind projectFilesKind)
-			: base(solutionDir, versionPath, unityVersion, windowsTargetPlatformVersion, platformToolset, ConstantsV40.SolutionFilename) {
+			: base(solutionDir, versionPath, unityVersion, windowsTargetPlatformVersion, platformToolset, ConstantsV40.SolutionFilenameFormatString) {
 			var msvcPath = Path.Combine(versionPath, "msvc");
 			switch (projectFilesKind) {
 			case ProjectFilesKind.V2017:

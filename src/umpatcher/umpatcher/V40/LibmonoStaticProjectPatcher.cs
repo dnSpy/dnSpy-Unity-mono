@@ -23,7 +23,7 @@ namespace UnityMonoDllSourceCodePatcher.V40 {
 
 		public LibmonoStaticProjectPatcher(SolutionOptionsV40 solutionOptions)
 			: base(solutionOptions, solutionOptions?.LibmonoStaticProject) {
-			this.solutionOptions = solutionOptions;
+			this.solutionOptions = solutionOptions!;
 		}
 
 		protected override void PatchCore() {

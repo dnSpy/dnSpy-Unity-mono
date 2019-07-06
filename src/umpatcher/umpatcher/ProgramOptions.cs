@@ -31,16 +31,20 @@ namespace UnityMonoDllSourceCodePatcher {
 	}
 
 	sealed class TimestampOptions {
+#pragma warning disable CS8618 // Non-nullable field is uninitialized.
 		public string ExecutableFilename;
+#pragma warning restore CS8618 // Non-nullable field is uninitialized.
 	}
 
 	sealed class PatchOptions {
+#pragma warning disable CS8618 // Non-nullable field is uninitialized.
 		public string UnityVersion;
 		public string UnityGitHash;
 		public string UnityRepoPath;
 		public string DnSpyUnityMonoRepoPath;
-		public string GitExePath;
-		public string WindowsTargetPlatformVersion;
-		public string PlatformToolset;
+#pragma warning restore CS8618 // Non-nullable field is uninitialized.
+		public string? GitExePath;
+		public string? WindowsTargetPlatformVersion;
+		public string? PlatformToolset;
 	}
 }

@@ -35,11 +35,11 @@ namespace UnityMonoDllSourceCodePatcher {
 		public abstract (string archName, string configName)[] SolutionPlatforms { get; }
 		public abstract string[] SolutionBuildInfos { get; }
 
-		protected SolutionOptions(string solutionDir, string versionPath, string unityVersion, string windowsTargetPlatformVersion, string platformToolset, string solutionFilename) {
+		protected SolutionOptions(string solutionDir, string versionPath, string unityVersion, string windowsTargetPlatformVersion, string platformToolset, string solutionFilenameFormatString) {
 			SolutionDirGuid = Guid.NewGuid();
-			SolutionFilename = Path.Combine(solutionDir, solutionFilename);
 			if (!UnityVersion.TryParse(unityVersion, out UnityVersion))
 				throw new InvalidOperationException($"Invalid version: {unityVersion}");
+			SolutionFilename = Path.Combine(solutionDir, string.Format(solutionFilenameFormatString, UnityVersion.Major));
 			UnityVersionDir = versionPath ?? throw new ArgumentNullException(nameof(versionPath));
 			WindowsTargetPlatformVersion = windowsTargetPlatformVersion ?? throw new ArgumentNullException(nameof(windowsTargetPlatformVersion));
 			PlatformToolset = platformToolset ?? throw new ArgumentNullException(nameof(platformToolset));

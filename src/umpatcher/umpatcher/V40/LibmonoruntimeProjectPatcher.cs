@@ -19,7 +19,7 @@
 
 namespace UnityMonoDllSourceCodePatcher.V40 {
 	sealed class LibmonoruntimeProjectPatcher : ProjectPatcherV40 {
-		public LibmonoruntimeProjectPatcher(SolutionOptionsV40 solutionOptions)
+		public LibmonoruntimeProjectPatcher(SolutionOptionsV40? solutionOptions)
 			: base(solutionOptions, solutionOptions?.LibmonoruntimeProject) {
 		}
 

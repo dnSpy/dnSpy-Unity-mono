@@ -31,7 +31,7 @@ namespace UnityMonoDllSourceCodePatcher {
 		readonly string newProjectToolsVersion;
 		protected readonly TextFilePatcher textFilePatcher;
 
-		protected ProjectPatcher(SolutionOptions solutionOptions, ProjectInfo project, string oldProjectToolsVersion, string newProjectToolsVersion) {
+		protected ProjectPatcher(SolutionOptions? solutionOptions, ProjectInfo? project, string oldProjectToolsVersion, string newProjectToolsVersion) {
 			this.solutionOptions = solutionOptions ?? throw new ArgumentNullException(nameof(solutionOptions));
 			this.project = project ?? throw new ArgumentNullException(nameof(project));
 			this.oldProjectToolsVersion = oldProjectToolsVersion ?? throw new ArgumentNullException(nameof(oldProjectToolsVersion));

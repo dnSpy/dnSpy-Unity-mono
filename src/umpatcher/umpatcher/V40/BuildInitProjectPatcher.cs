@@ -19,7 +19,7 @@
 
 namespace UnityMonoDllSourceCodePatcher.V40 {
 	sealed class BuildInitProjectPatcher : ProjectPatcherV40 {
-		public BuildInitProjectPatcher(SolutionOptionsV40 solutionOptions)
+		public BuildInitProjectPatcher(SolutionOptionsV40? solutionOptions)
 			: base(solutionOptions, solutionOptions?.BuildInitProject) {
 		}
 

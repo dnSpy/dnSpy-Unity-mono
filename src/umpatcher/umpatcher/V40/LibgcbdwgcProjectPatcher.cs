@@ -19,7 +19,7 @@
 
 namespace UnityMonoDllSourceCodePatcher.V40 {
 	sealed class LibgcbdwgcProjectPatcher : ProjectPatcherV40 {
-		public LibgcbdwgcProjectPatcher(SolutionOptionsV40 solutionOptions)
+		public LibgcbdwgcProjectPatcher(SolutionOptionsV40? solutionOptions)
 			: base(solutionOptions, solutionOptions?.LibgcbdwgcProject) {
 		}
 

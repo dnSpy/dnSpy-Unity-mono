@@ -43,8 +43,8 @@ namespace UnityMonoDllSourceCodePatcher {
 				standardError = process.StandardError.ReadToEnd();
 			}
 			else {
-				standardOutput = null;
-				standardError = null;
+				standardOutput = string.Empty;
+				standardError = string.Empty;
 			}
 			return process.ExitCode;
 		}

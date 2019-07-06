@@ -53,7 +53,7 @@ namespace UnityMonoDllSourceCodePatcher {
 					switch (arg) {
 					case "--git":
 						if (nextArg == null)
-							throw new CommandLineParserException("Missing path to git.exe");
+							throw new CommandLineParserException("Missing path to git executable");
 						options.PatchOptions.GitExePath = GetFile(nextArg);
 						i++;
 						break;
@@ -114,7 +114,7 @@ Usage:
     umpatcher <unity-version> <unity-git-hash> <unity-repo-path> <dnSpy-Unity-mono-repo-path> [--git PATH] [--winpver VER] [--toolset VER]
     umpatcher --timestamp <mono.dll>
 
-    --git PATH               Path to git.exe if umpatcher can't find it in the usual locations
+    --git PATH               Path to git executable if umpatcher can't find it in the usual locations
     --winpver VER            <WindowsTargetPlatformVersion> version, default is {Constants.DefaultWindowsTargetPlatformVersion}
     --toolset VER            <PlatformToolset> version, default is {Constants.DefaultPlatformToolset}
 

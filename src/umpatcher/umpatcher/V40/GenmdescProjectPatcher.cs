@@ -19,7 +19,7 @@
 
 namespace UnityMonoDllSourceCodePatcher.V40 {
 	sealed class GenmdescProjectPatcher : ProjectPatcherV40 {
-		public GenmdescProjectPatcher(SolutionOptionsV40 solutionOptions)
+		public GenmdescProjectPatcher(SolutionOptionsV40? solutionOptions)
 			: base(solutionOptions, solutionOptions?.GenmdescProject) {
 		}
 

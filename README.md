@@ -6,7 +6,7 @@ The `master` branch contains the original files. You have to check out the `dnSp
 
 - Pull in the latest Unity mono.dll source code (either `git pull` if you have it or `git clone https://github.com/Unity-Technologies/mono.git`)
 - Get this repo and make sure `master` and `dnSpy` branches are at the latest commit (`git pull` in both branches)
-- Compile `umpatcher` in this repo
+- Compile `umpatcher` in this repo (you need VS2019 or later and .NET Core SDK 3.0 or later installed)
 - Download and install the correct Unity editor version
 	- https://unity3d.com/get-unity/download/archive
 	- https://unity3d.com/unity/qa/lts-releases
@@ -30,11 +30,11 @@ The `master` branch contains the original files. You have to check out the `dnSp
 
 # Building `mono.dll` & `mono-2.0-bdwgc.dll`
 
-- `dnSpy-Unity-mono.sln` (Unity with .NET 2.0-3.5 assemblies)
+- `dnSpy-Unity-mono-VVVV.x.sln` (Unity with .NET 2.0-3.5 assemblies), where `VVVV` is the major version number, eg. 4, 5, 2017, ...
 	- Use configuration `Release_eglib`
 	- Use platform `x86` or `x64`
 
-- `dnSpy-Unity-mono-V40.sln` (Unity with .NET 4.x assemblies)
+- `dnSpy-Unity-mono-VVVV.x-V40.sln` (Unity with .NET 4.x assemblies), where `VVVV` is the major version number, eg. 2017, 2018, ...
 	- Use configuration `Release`
 	- Use platform `x86` or `x64`
 

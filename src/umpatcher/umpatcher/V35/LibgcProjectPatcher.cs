@@ -19,7 +19,7 @@
 
 namespace UnityMonoDllSourceCodePatcher.V35 {
 	sealed class LibgcProjectPatcher : ProjectPatcherV35 {
-		public LibgcProjectPatcher(SolutionOptionsV35 solutionOptions)
+		public LibgcProjectPatcher(SolutionOptionsV35? solutionOptions)
 			: base(solutionOptions, solutionOptions?.LibgcProject) {
 		}
 
