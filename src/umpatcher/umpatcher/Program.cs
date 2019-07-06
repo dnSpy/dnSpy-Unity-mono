@@ -84,7 +84,7 @@ namespace UnityMonoDllSourceCodePatcher {
 			if (options.GitExePath == null)
 				options.GitExePath = GitUtils.FindGit();
 			if (options.GitExePath == null)
-				throw new ProgramException("Could not find git.exe in the usual places. Use the --git option");
+				throw new ProgramException("Could not find git executable in the usual places. Use the --git option");
 			if (options.WindowsTargetPlatformVersion == null)
 				options.WindowsTargetPlatformVersion = Constants.DefaultWindowsTargetPlatformVersion;
 			if (options.PlatformToolset == null)

@@ -18,30 +18,31 @@
 */
 
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 
 namespace UnityMonoDllSourceCodePatcher {
 	static class GitUtils {
-		const string PATH_ENV_VAR = "PATH";
-		const string GIT_PROGRAMFILES_NAME = "Git";
-		const string GIT_PROGRAMFILES_BIN_NAME = "bin";
-		const string GIT_EXE = "git.exe";
+		static string GitExeName => RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "git.exe" : "git";
 
 		public static string? FindGit() {
 			if (TryFindGitFromPathEnvVar(out var gitPath))
 				return gitPath;
-			if (TryFindFromPath(Environment.SpecialFolder.ProgramFiles, out gitPath))
-				return gitPath;
-			if (TryFindFromPath(Environment.SpecialFolder.ProgramFilesX86, out gitPath))
-				return gitPath;
+			if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) {
+				if (TryFindFromPath_ProgramFiles_Windows(Environment.SpecialFolder.ProgramFiles, out gitPath))
+					return gitPath;
+				if (TryFindFromPath_ProgramFiles_Windows(Environment.SpecialFolder.ProgramFilesX86, out gitPath))
+					return gitPath;
+			}
 
 			return null;
 		}
 
 		static bool TryFindGitFromPathEnvVar([NotNullWhenTrue] out string? gitPath) {
 			gitPath = null;
-			var pathEnvVar = Environment.GetEnvironmentVariable(PATH_ENV_VAR);
+			var pathEnvVar = Environment.GetEnvironmentVariable("PATH");
 			if (pathEnvVar == null)
 				return false;
 			foreach (var path in pathEnvVar.Split(new char[] { Path.PathSeparator }, StringSplitOptions.RemoveEmptyEntries)) {
@@ -52,12 +53,13 @@ namespace UnityMonoDllSourceCodePatcher {
 			return false;
 		}
 
-		static bool TryFindFromPath(Environment.SpecialFolder folder, [NotNullWhenTrue] out string? gitPath) {
+		static bool TryFindFromPath_ProgramFiles_Windows(Environment.SpecialFolder folder, [NotNullWhenTrue] out string? gitPath) {
+			Debug.Assert(RuntimeInformation.IsOSPlatform(OSPlatform.Windows));
 			gitPath = null;
 			var path = Environment.GetFolderPath(folder);
 			if (!Directory.Exists(path))
 				return false;
-			path = Path.Combine(path, GIT_PROGRAMFILES_NAME, GIT_PROGRAMFILES_BIN_NAME);
+			path = Path.Combine(path, "Git", "bin");
 			return TryFindFromPath(path, out gitPath);
 		}
 
@@ -66,7 +68,7 @@ namespace UnityMonoDllSourceCodePatcher {
 			if (!Directory.Exists(path))
 				return false;
 			try {
-				var exePath = Path.Combine(path, GIT_EXE);
+				var exePath = Path.Combine(path, GitExeName);
 				if (File.Exists(exePath)) {
 					gitPath = exePath;
 					return true;
