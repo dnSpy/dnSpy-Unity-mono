@@ -38,7 +38,7 @@ namespace UnityMonoDllSourceCodePatcher.V40 {
 			"msvc",
 		};
 
-		public const string SolutionFilenameFormatString = "dnSpy-Unity-mono-{0}.x-V40.sln";
+		public const string SolutionFilenameFormatString = "dnSpy-Unity-mono-v{0}.x-V40.sln";
 		public static readonly string[] SolutionConfigurations = new string[] {
 			"Debug",
 			"Release",
