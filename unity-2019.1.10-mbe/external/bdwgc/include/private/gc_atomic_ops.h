@@ -100,7 +100,7 @@
     } /* extern "C" */
 # endif
 
-#elif !defined(NN_PLATFORM_CTR)
+#elif false
   /* Fallback to libatomic_ops. */
 # include "atomic_ops.h"
 
