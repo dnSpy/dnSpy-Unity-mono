@@ -84,7 +84,7 @@ namespace UnityMonoDllSourceCodePatcher {
 
 		static string PathCombine(string path1, string path2) {
 			var list = new List<string>();
-			list.AddRange(path1.Split('/'));
+			list.Add(path1);
 			list.AddRange(path2.Split('/'));
 			return Path.Combine(list.ToArray());
 		}

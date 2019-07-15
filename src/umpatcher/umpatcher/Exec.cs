@@ -36,17 +36,18 @@ namespace UnityMonoDllSourceCodePatcher {
 				options.RedirectStandardOutput = true;
 				options.RedirectStandardError = true;
 			}
-			var process = Process.Start(options);
-			process.WaitForExit();
-			if (redirectOutput) {
-				standardOutput = process.StandardOutput.ReadToEnd();
-				standardError = process.StandardError.ReadToEnd();
+			using (var process = Process.Start(options)) {
+				process.WaitForExit();
+				if (redirectOutput) {
+					standardOutput = process.StandardOutput.ReadToEnd();
+					standardError = process.StandardError.ReadToEnd();
+				}
+				else {
+					standardOutput = string.Empty;
+					standardError = string.Empty;
+				}
+				return process.ExitCode;
 			}
-			else {
-				standardOutput = string.Empty;
-				standardError = string.Empty;
-			}
-			return process.ExitCode;
 		}
 	}
 }
