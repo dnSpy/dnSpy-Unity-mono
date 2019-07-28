@@ -31,7 +31,7 @@ namespace UnityMonoDllSourceCodePatcher {
 
 		public SolutionPatcher(SolutionOptions solutionOptions) {
 			this.solutionOptions = solutionOptions ?? throw new ArgumentNullException(nameof(solutionOptions));
-			solutionDir = Path.GetDirectoryName(solutionOptions.SolutionFilename);
+			solutionDir = Path.GetDirectoryName(solutionOptions.SolutionFilename)!;
 			textFilePatcher = new TextFilePatcher(solutionOptions.SolutionFilename);
 			unityVersionDirGuid = Guid.NewGuid();
 		}
