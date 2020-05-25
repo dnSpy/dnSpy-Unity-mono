@@ -13,9 +13,12 @@ The `master` branch contains the original files. You have to check out the `dnSp
 	- https://unity3d.com/unity/qa/patch-releases
 - Either install the Unity editor or extract the necessary .dlls with extractmono.bat
 - If using extractmono.bat
+    - 7zip must be installed and 7z.exe must be in PATH
+    - extractmono.bat also assumes there are no - (hyphens) besides the one in the UnityEdtor file name
     - Pass the directory the UnitySetupxxx.exe files(s) are in as the first argument
     - Pass the directory you want the file(s) to be extracted to as the second argument
     - Pass "mbe" or "both" as third parameter. "mbe" will extract mono-2.0-bdwgc.dll, "both" will both dlls, and no third parameter will extract mono.dll
+    - Example: .\extractmono.bat C:\Users\Unfou\Downloads C:\Users\Unfou\Desktop\mono both
 - Otherwise, if installing Unity editor:
 - Locate the compiled `mono.dll` & `mono-2.0-bdwgc.dll` files, eg.:
 	- `C:\Program Files\Unity\Editor\Data\PlaybackEngines\windowsstandalonesupport\Variations\win32_nondevelopment_mono\Data\Mono\EmbedRuntime\mono.dll`
