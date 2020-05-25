@@ -1,5 +1,5 @@
 @echo off
-setlocal EnableDelayedExpansion
+setlocal
 
 rem Check if user knows what they're doing
 if [%1] == [] goto Usage
