@@ -7,10 +7,16 @@ The `master` branch contains the original files. You have to check out the `dnSp
 - Pull in the latest Unity mono.dll source code (either `git pull` if you have it or `git clone https://github.com/Unity-Technologies/mono.git`)
 - Get this repo and make sure `master` and `dnSpy` branches are at the latest commit (`git pull` in both branches)
 - Compile `umpatcher` in this repo (you need VS2019 or later and .NET Core SDK 3.0 or later installed)
-- Download and install the correct Unity editor version
+- Download the correct Unity editor version
 	- https://unity3d.com/get-unity/download/archive
 	- https://unity3d.com/unity/qa/lts-releases
 	- https://unity3d.com/unity/qa/patch-releases
+- Either install the Unity editor or extract the necessary .dlls with extractmono.bat
+- If using extractmono.bat
+    - Pass the directory the UnitySetupxxx.exe files(s) are in as the first argument
+    - Pass the directory you want the file(s) to be extracted to as the second argument
+    - Pass "mbe" or "both" as third parameter. "mbe" will extract mono-2.0-bdwgc.dll, "both" will both dlls, and no third parameter will extract mono.dll
+- Otherwise, if installing Unity editor:
 - Locate the compiled `mono.dll` & `mono-2.0-bdwgc.dll` files, eg.:
 	- `C:\Program Files\Unity\Editor\Data\PlaybackEngines\windowsstandalonesupport\Variations\win32_nondevelopment_mono\Data\Mono\EmbedRuntime\mono.dll`
 	- `C:\Program Files\Unity\Editor\Data\PlaybackEngines\windowsstandalonesupport\Variations\win64_nondevelopment_mono\Data\Mono\EmbedRuntime\mono.dll`
