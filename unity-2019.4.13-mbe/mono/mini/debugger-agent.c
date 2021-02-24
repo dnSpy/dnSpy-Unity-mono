@@ -1027,6 +1027,7 @@ mono_debugger_agent_parse_options (char *options)
 			agent_config.keepalive = atoi (arg + 10);
 		} else if (strncmp (arg, "setpgid=", 8) == 0) {
 			agent_config.setpgid = parse_flag ("setpgid", arg + 8);
+		} else if (dnSpy_debugger_agent_parse_options (arg)) {
 		} else {
 			print_usage ();
 			exit (1);
@@ -1151,6 +1152,8 @@ mono_debugger_agent_init (void)
 #endif // !RUNTIME_IL2CPP
 	mono_profiler_set_jit_done_callback (prof, jit_done);
 	mono_profiler_set_jit_failed_callback (prof, jit_failed);
+
+	dnSpy_debugger_init_after_agent ();
 
 	mono_native_tls_alloc (&debugger_tls_id, NULL);
 
@@ -4686,6 +4689,7 @@ insert_breakpoint (MonoSeqPointInfo *seq_points, MonoDomain *domain, MonoJitInfo
 	BreakpointInstance *inst;
 	SeqPointIterator it;
 	gboolean it_has_sp = FALSE;
+	SeqPoint found_sp;
 
 	if (error)
 		error_init (error);
@@ -4694,9 +4698,14 @@ insert_breakpoint (MonoSeqPointInfo *seq_points, MonoDomain *domain, MonoJitInfo
 	while (mono_seq_point_iterator_next (&it)) {
 		if (it.seq_point.il_offset == bp->il_offset) {
 			it_has_sp = TRUE;
-			break;
+			if (!(it.seq_point.flags & MONO_SEQ_POINT_FLAG_NONEMPTY_STACK)) {
+				found_sp = it.seq_point;
+				break;
+			}
+			found_sp = it.seq_point;
 		}
 	}
+	it.seq_point = found_sp;
 
 	if (!it_has_sp) {
 		/*
@@ -11206,7 +11215,8 @@ thread_commands (int command, guint8 *p, guint8 *end, Buffer *buf)
 		mono_loader_lock ();
 		tls = (DebuggerTlsData *)mono_g_hash_table_lookup (thread_to_tls, thread);
 		mono_loader_unlock ();
-		g_assert (tls);
+		if (!tls)
+			return ERR_INVALID_ARGUMENT;
 
 		compute_frame_info (thread, tls, TRUE); //the last parameter is TRUE to force that the frame info that will be send is synchronised with the debugged thread
 
